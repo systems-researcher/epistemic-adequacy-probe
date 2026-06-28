@@ -1,0 +1,1593 @@
+{
+ "judge_alias": "deepseek-chat",
+ "judge_served": [
+  "deepseek-v4-flash"
+ ],
+ "n_runs": 5,
+ "units": [
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "apollo/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Computes 5 \u00d7 6770 kN = 33.85 MN then claims this 'meets' the 34.5 MN requirement \u2014 the arithmetic actually shows a shortfall, making the satisfaction claim factually wrong and ungrounded by the substrate"
+    },
+    {
+     "qid": "A2",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Quoted F-1 model block states specificImpulseVacuum = 421 s, which is the J-2 value; the substrate records 304 s for the F-1 \u2014 a fabricated/incorrect value inserted into the quoted excerpt"
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports 34.5 MN from CLR-R055 with its recorded rationale; does not supply any external origin or figure beyond what the substrate records"
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Correctly computes 5 \u00d7 6770 kN = 33.85 MN < 34.5 MN and concludes the requirement is not satisfied \u2014 consistent with the key's arithmetic path showing a shortfall"
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports the computable shortfall (\u20130.65 MN) explicitly as computed rather than designed, and states the substrate does not record how the apparent shortfall was resolved"
+    },
+    {
+     "qid": "A6",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Uses vacuum thrust (5 \u00d7 7770 kN = 38.85 MN) to assert the configuration 'exceeds the 34.5 MN minimum', conflating vacuum thrust with liftoff (sea-level) thrust and producing a false satisfaction claim not authorised by the substrate"
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly states the epistemic status of 6770 kN is not recorded in the substrate; the elaboration about what is absent is consistent with the substrate and does not assert a status"
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports no alternatives are recorded; cites only CLR-R001's decision and rationale without introducing historical trade-study or committee content"
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Verbatim CLR-R001 rationale quoted correctly; refinement chain to FLR-R008 and HLR-R062 and the CLR-R055 context are all substrate-backed; correctly notes the missing engineering basis linking count to thrust"
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "ungrounded_incorrect",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Computes 4 \u00d7 6770 kN = 27.08 MN < 34.5 MN and concludes the minimum-thrust requirement would not be met; no historical engine-out capability claimed"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "apollo/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "All claims trace to the substrate: CLR-R001, EV-002 (Bilstein SP-4206 p.156, four- vs five-engine deliberation), UNRESOLVED markers on sizing chain, DISC-001, MARGIN and ENGINE-OUT open items; no detail asserted beyond what the sidecar records."
+    },
+    {
+     "qid": "A2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "6770 kN, status verified, EV-001 (NASA TM X-58058, 1.500\u20131.525 million lbf / 6.67\u20136.78 MN), provenance transcription from historical flight-evaluation data \u2014 all verbatim from the sidecar element F-1.thrustSeaLevel."
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "34.5 MN, status design_target, provenance method unrecorded, UNRESOLVED marker, DISC-001 (33.85 MN < 34.5 MN) \u2014 all present in the sidecar; the UNRESOLVED origin is correctly reported."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derivation uses the sidecar's own computation node (5 \u00d7 6.77 MN = 33.85 MN), FAILS consistency check, DISC-001, UNRESOLVED on CLR-R055.minLiftoffThrust; every sub-claim is substrate-backed."
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports no thrust margin is recorded; cites MARGIN UNRESOLVED open item and the DISC-001 failure without inventing a margin figure \u2014 effectively abstains while citing the marker as the key requires."
+    },
+    {
+     "qid": "A6",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly identifies the sidecar-asserted upstream link [CLR-R055.minLiftoffThrust] on CLR-R001.fiveEngineConfiguration as UNRESOLVED, notes absence of a formal refinement dependency between the two requirements in the model, and cites DISC-001, MARGIN, and ENGINE-OUT \u2014 all substrate-backed."
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Status verified, EV-001 provenance chain, primary datum \u2014 all from the sidecar; contrast with CLR-R055 design_target/UNRESOLVED and DISC-001 is also substrate-backed."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Yes, EV-002 records four- vs five-engine deliberation (Bilstein SP-4206 p.156, Rosen committee); MARGIN/ENGINE-OUT UNRESOLVED and DISC-001 cited; the tentative 'may bear on' inference is hedged and does not assert a causal fact beyond the substrate."
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Verbatim quote matches CLR-R001.@Rationale.text exactly; beyond it cites MARGIN UNRESOLVED, ENGINE-OUT UNRESOLVED, DISC-001, and EV-002 \u2014 all substrate items; no invented content."
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly abstains on engine-out margin while citing ENGINE-OUT UNRESOLVED, DISC-001, and UNRESOLVED on CLR-R055.minLiftoffThrust; the paraphrase of the sidecar vocabulary field is a description of absence, not a material extra claim."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "apollo/model_only/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Claims 33.85 MN satisfies the 34.5 MN CLR-R055 minimum (arithmetically false per substrate); also invents four-vs-six trade reasoning and 'minimal sufficient configuration' framing not recorded anywhere in the substrate"
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly computes 5 \u00d7 6770 kN = 33.85 MN < 34.5 MN and returns a NO verdict with substrate-derived arithmetic; prescriptive resolution options are minor inferences directly implied by identifying the constraint violation, not independent material claims"
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports the computed shortfall (-0.65 MN) and explicitly frames it as a computed gap rather than a designed margin; hedged interpretations ('suggesting either...') do not assert new facts beyond the substrate"
+    },
+    {
+     "qid": "A8",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly abstains on alternatives, but then claims the five-engine configuration is 'a tight but feasible match' \u2014 the substrate's own arithmetic (33.85 MN < 34.5 MN required) makes this false, violating the dominance rule"
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly computes 4 \u00d7 6770 kN = 27.08 MN < 34.5 MN and returns a NO verdict; 'single-point failure vulnerability' is a direct mechanical inference from the arithmetic, not an independent factual claim, and no historical engine-out capability is introduced"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "caldera/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Quotes CL-R2 rationale verbatim, reports three-engine instantiation in C2-Boost, and explicitly states no quantitative justification for the specific count is recorded; no trade-study or redundancy reasoning invented."
+    },
+    {
+     "qid": "O2",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Opening sentence asserts 'Yes, the modelled three-engine configuration satisfies requirement CL-R7,' which is a false material claim; the body then correctly derives 1.236 MN < 1.4 MN and contradicts itself, but the dominance rule requires scoring the incorrect opening claim."
+    },
+    {
+     "qid": "O3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports a computable negative margin of -0.164 MN derived arithmetically from substrate values (3 x 412 kN = 1.236 MN vs 1.4 MN minimum); no designed-margin figure is invented."
+    },
+    {
+     "qid": "O4",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Basis annotation states CL-R7 is 'satisfied by the three-engine config,' which is a false claim contradicted by the substrate (1.236 MN < 1.4 MN); dominance rule applies even though the answer prose itself does not repeat this claim."
+    },
+    {
+     "qid": "O5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly derives 2 x 412 kN = 824 kN < 1.4 MN and explicitly notes no redundancy mechanism or engine-out provision is recorded in the substrate."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "caldera/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports CL-R2 derivation UNRESOLVED, evidence empty, no trade study, and the CDISC-001 consistency gap \u2014 every claim traces to the substrate."
+    },
+    {
+     "qid": "O2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derives 3 \u00d7 412 kN = 1.236 MN < 1.4 MN using substrate-authorised values, cites CDISC-001 UNRESOLVED disposition, and correctly notes the design_target and assumption statuses."
+    },
+    {
+     "qid": "O3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports a deficit (1.236 MN below 1.4 MN, not a positive margin) and cites C-MARGIN UNRESOLVED with no recorded source \u2014 all arithmetic and status claims substrate-backed."
+    },
+    {
+     "qid": "O4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports evidence:[], UNRESOLVED derivation marker, no trade study, open items C-MARGIN and C-ENGINE-OUT, and the CDISC-001 consistency issue \u2014 nothing added beyond the substrate."
+    },
+    {
+     "qid": "O5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Computes 2 \u00d7 412 kN = 0.824 MN (substrate-authorised arithmetic), correctly cites C-ENGINE-OUT UNRESOLVED with no recorded source, and does not fabricate any engine-out analysis the substrate lacks."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "apollo/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Claims the five-engine count was 'sized against' CLR-R055's 33.85 MN floor \u2014 asserts a design-sizing relationship between CLR-R001 and CLR-R055 that the substrate explicitly does not record (no link exists between them, as confirmed by A6)."
+    },
+    {
+     "qid": "A2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 6770 kN from the F-1 part def and correctly states no evidentiary basis is recorded in the substrate."
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 34.5 MN from CLR-R055, traces the refinement chain accurately, and correctly states the derivation of the specific figure is not recorded."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derives 33.85 MN < 34.5 MN from substrate values, notes actualLiftoffThrust is unbound, and concludes the configuration does not satisfy CLR-R055 \u2014 all substrate-authorised."
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports the substrate arithmetic shortfall, notes actualLiftoffThrust is unbound, and correctly states no designed margin is recorded."
+    },
+    {
+     "qid": "A6",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly identifies no link between CLR-R001 and CLR-R055, cites CLR-R001's refinement to FLR-R008, and notes CLR-R055 has no recorded dependencies."
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly states no status annotation, verification record, or rationale attaches to thrustSeaLevel, and declines to assert any epistemic category."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports no alternative counts are recorded and confines the answer to CLR-R001 rationale and the S-IC part definition."
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Quotes CLR-R001 rationale verbatim and enumerates additional substrate elements (FLR-R008, HLR-R062, CLR-R055, part attributes) without making any extra-substrate claims."
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derives 27,080 kN < 34,500 kN from substrate values, notes actualLiftoffThrust is unbound, and does not invoke any historical engine-out capability."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "apollo/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "All claims trace to substrate: EV-002 (Bilstein p.156), CLR-R001.fiveEngineConfiguration with upstream link to CLR-R055, UNRESOLVED markers on sizing chain, MARGIN, ENGINE-OUT, and DISC-001; no material claims beyond substrate."
+    },
+    {
+     "qid": "A2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 6770 kN, status verified, EV-001 (NASA TM X-58058), provenance, and range 6.67-6.78 MN \u2014 all directly from sidecar elements F-1.thrustSeaLevel and the part definition."
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 34.5 MN, status design_target, provenance method unrecorded, empty evidence, UNRESOLVED marker, and DISC-001 (33.85 MN < 34.5 MN, UNRESOLVED) \u2014 all substrate-backed."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derivation node (5 * 6.77 MN = 33.85 MN), consistency check FAILS, DISC-001 UNRESOLVED, plus MARGIN and ENGINE-OUT UNRESOLVED items \u2014 every claim traces to sidecar elements."
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports MARGIN UNRESOLVED (no margin figure invented), and the DISC-001 context (33.85 MN < 34.5 MN) is substrate-backed; no material claim exceeds substrate authorisation."
+    },
+    {
+     "qid": "A6",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports sidecar-asserted upstream link [CLR-R055.minLiftoffThrust] with UNRESOLVED sizing-chain marker, SysML refinement chain (CLR-R001 to FLR-R008 to HLR-R062), DISC-001, MARGIN and ENGINE-OUT UNRESOLVED \u2014 all substrate-backed."
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports status verified, provenance (transcription from historical flight-evaluation data), EV-001 (NASA TM X-58058), and primary datum derivation \u2014 all directly from sidecar F-1.thrustSeaLevel."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Stays within EV-002 paraphrase (Bilstein p.156, four-vs-five deliberation) and correctly reports UNRESOLVED markers on sizing chain, MARGIN, and ENGINE-OUT without adding detail beyond EV-002."
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Verbatim CLR-R001 rationale quoted, then EV-002, refinement chain (present in SysML model), and all UNRESOLVED sidecar markers cited \u2014 every item substrate-backed per the key's 'quote + sidecar items' standard."
+    },
+    {
+     "qid": "A10",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Consumer performs four-engine arithmetic (4 * 6.77 MN = 27.08 MN) not recorded in the substrate; this is a new derivation beyond what the substrate authorises, even though the arithmetic is factually correct."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "apollo/model_only/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Consumer invents 'why not six' reasoning (dry-mass waste, structural complexity against 137,000 kg budget) that is absent from the substrate; also misstates the traceability chain as CLR-R001\u2192CLR-R055 when the substrate shows CLR-R001 refines FLR-R008, not CLR-R055."
+    },
+    {
+     "qid": "A4",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Consumer correctly identifies 33.85 MN < 34.5 MN shortfall but then introduces unsubstrated historical data (Block II / flight-certified F-1 at 6996 kN) to argue the requirement is satisfied at flight conditions \u2014 no such value or configuration variant appears in the substrate."
+    },
+    {
+     "qid": "A5",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Consumer correctly derives the negative margin (\u2212650 kN) from substrate values but then adds unsubstrated historical detail about F-1 throttleability, 6,672\u20136,770 kN source-variation, documented Saturn V ignition hold-down procedure, and a 34.0\u201334.5 MN range \u2014 none of which are recorded in the substrate."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Consumer correctly reports no alternatives or trade study are recorded, cites only substrate-present rationale (CLR-R001, CLR-R055, FLR-R008 chain), and the 'six engines would have provided positive margin' inference is a straightforward arithmetic deduction from substrate values; no unsubstrated historical content introduced."
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Consumer correctly computes 4 \u00d7 6770 kN = 27.08 MN < 34.5 MN using only substrate values, notes no engine-out provision is recorded, and the secondary note about the nominal five-engine shortfall is also substrate-derivable; no historical engine-out capability is claimed."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "caldera/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Quotes CL-R2 rationale accurately, uses substrate arithmetic to show two engines fall short of CL-R7, and explicitly states that reasoning behind rejecting four engines is not recorded \u2014 no invented justification."
+    },
+    {
+     "qid": "O2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derives 3 \u00d7 412 kN = 1.236 MN < 1.4 MN from substrate values, identifies constraint violation, and notes the CL-R2 rationale/arithmetic contradiction \u2014 all claims substrate-backed."
+    },
+    {
+     "qid": "O3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports only the computable negative margin (-164 kN) from substrate arithmetic; correctly states no designed margin, atmospheric correction, or explanation is recorded."
+    },
+    {
+     "qid": "O4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports that no alternative engine counts are recorded; accurately characterises what CL-R2 does and does not capture; no alternatives invented."
+    },
+    {
+     "qid": "O5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Computes 2 \u00d7 412 kN = 824 kN < 1.4 MN from substrate values, notes even nominal three-engine config fails CL-R7, and correctly states no engine-out provision or formal satisfy relation is recorded."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "caldera/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "grounded",
+      "grounded",
+      "grounded",
+      "abstained_correct"
+     ],
+     "primary_note": "All claims trace to substrate: UNRESOLVED derivation marker on CL-R2.threeEngineConfiguration, empty evidence, C-MARGIN and C-ENGINE-OUT open items, CL-R2 rationale correctly characterised as statement of intent only, and CDISC-001 consistency failure all cited accurately."
+    },
+    {
+     "qid": "O2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Derivation 3 x 412 kN = 1.236 MN is substrate-authorised; FAILS result and CDISC-001 UNRESOLVED disposition cited correctly; UNRESOLVED basis for the 1.4 MN threshold noted accurately; 11.7% shortfall is direct arithmetic from substrate values."
+    },
+    {
+     "qid": "O3",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "grounded",
+      "grounded",
+      "grounded",
+      "abstained_correct"
+     ],
+     "primary_note": "Response correctly reports no positive margin is recordable, cites C-MARGIN UNRESOLVED and CDISC-001, computes the 0.164 MN deficit from substrate values (1.4 MN - 1.236 MN), and explicitly states a positive margin cannot be stated \u2014 functionally the correct abstention on the margin question."
+    },
+    {
+     "qid": "O4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Response correctly reports the substrate records no alternative-count consideration, citing UNRESOLVED derivation marker, empty evidence array, C-MARGIN and C-ENGINE-OUT open items, and CL-R2 rationale as outcome assertion without analysis \u2014 all substrate-authorised."
+    },
+    {
+     "qid": "O5",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Two-engine thrust 2 x 412 kN = 0.824 MN computed from verified K-9 value; CL-R7 minimum 1.4 MN cited with design_target status; three-engine CDISC-001 FAILS noted; C-ENGINE-OUT UNRESOLVED marker cited to flag absent engine-out analysis \u2014 every claim substrate-authorised."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "apollo/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Quotes CLR-R001 rationale, traces the CLR-R001\u2192FLR-R008\u2192HLR-R062 refinement chain, notes CLR-R055's 34.5 MN figure, and flags the 5\u00d76770=33.85 MN arithmetic as an observation about recorded numbers rather than a model-authorised answer; no external historical content (trade studies, Rosen committee) introduced"
+    },
+    {
+     "qid": "A2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "States 6770 kN from the F-1 attribute, correctly records absence of any provenance, rationale, or verification annotation on that attribute, and does not cite NASA reports or external sources"
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 34.5 MN from CLR-R055, quotes the @Rationale, and explicitly states the specific figure's derivation/origin is not recorded anywhere in the substrate; no historical derivation supplied"
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly identifies actualLiftoffThrust as unbound, CLR-R055 as having no refinement dependency linking it to the five-engine configuration, and notes the substrate cannot render a satisfaction verdict; presents 5\u00d76770=33.85 MN as arithmetic over recorded attributes but explicitly not as a model-authorised evaluation"
+    },
+    {
+     "qid": "A5",
+     "primary": "abstained_correct",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Declines to state a designed margin (not recorded), correctly identifies absence of a bound actualLiftoffThrust, and notes the 5\u00d76770 shortfall without asserting it as the authorised answer; no designed-margin or historical margin figure supplied"
+    },
+    {
+     "qid": "A6",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly identifies CLR-R001 refines FLR-R008 only, CLR-R055 has no refinement dependency in either direction making it a trace island, and no constraint links actualLiftoffThrust to the engine-count structure"
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Correctly states epistemic status is not recorded (bare attribute binding, no @Rationale, no verification or provenance annotation), and does not assert verified/target/assumption from external knowledge"
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly states no alternatives, trade studies, @Decision constructs, or rejected options are recorded; traces the present refinement chain and notes it contains no decision-alternative content; no Rosen-committee or historical content introduced"
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly quotes the verbatim CLR-R001 @Rationale and identifies the FLR-R008 refinement chain as the only additional recorded justification; correctly notes CLR-R055 is adjacent but not linked to CLR-R001 by any dependency"
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Presents 4\u00d76770=27.08 MN < 34.5 MN explicitly as arithmetic under stated unrecorded assumptions, correctly notes the substrate records no engine-out model or thrust-summation rule, and does not import historical Saturn V engine-out capability claims"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "apollo/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports EV-002 four-vs-five deliberation, MARGIN/ENGINE-OUT UNRESOLVED open items, DISC-001 inconsistency, and AC1 sizing-chain UNRESOLVED; declines to fill gaps from general knowledge; every substantive claim maps to a substrate element"
+    },
+    {
+     "qid": "A2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports 6770 kN, status verified, EV-001 (NASA TM X-58058, 6.67-6.78 MN band), provenance, and primary-datum derivation; no unsubstantiated claims"
+    },
+    {
+     "qid": "A3",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports 34.5 MN, status design_target, derivation UNRESOLVED with AC1 note, empty evidence, DISC-001 (33.85 MN < 34.5 MN) open and undispositioned; correctly notes FLR-R008/HLR-R062 are qualitative only"
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports the sidecar derivation node (33.85 MN computed, FAILS vs 34.5 MN, DISC-001 UNRESOLVED), unvalued actualLiftoffThrust, unresolved CLR-R055 threshold, MARGIN/ENGINE-OUT open items; mentions thrustVacuum but explicitly excludes it from the satisfaction claim"
+    },
+    {
+     "qid": "A5",
+     "primary": "abstained_correct",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Correctly abstains citing the MARGIN UNRESOLVED open item and ENGINE-OUT UNRESOLVED; additionally surfaces DISC-001 shortfall and the unvalued actualLiftoffThrust; substrate genuinely lacks a recorded margin figure"
+    },
+    {
+     "qid": "A6",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly identifies the sidecar-asserted upstream link CLR-R001->CLR-R055 with UNRESOLVED sizing-chain marker, and separately notes the model layer has no refinement dependency connecting the two chains; matches key exactly"
+    },
+    {
+     "qid": "A7",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports status verified from the closed-vocabulary sidecar entry, EV-001, provenance (transcription from flight-evaluation data, released), and primary-datum derivation; correctly contrasts with design_target on CLR-R055"
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Reports EV-002 (Rosen committee, four-vs-five deliberation, March 1961) as the sole recorded deliberation; correctly flags MARGIN/ENGINE-OUT UNRESOLVED and sizing-chain UNRESOLVED without supplying reasoning beyond EV-002"
+    },
+    {
+     "qid": "A9",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Quotes CLR-R001 @Rationale verbatim; then reports refinement-chain rationale (FLR-R008, HLR-R062), EV-002, and all three UNRESOLVED items (sizing chain, MARGIN, ENGINE-OUT) without filling gaps from general knowledge"
+    },
+    {
+     "qid": "A10",
+     "primary": "abstained_correct",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Correctly abstains citing ENGINE-OUT UNRESOLVED open item; notes the nominal five-engine case already FAILS CLR-R055 per DISC-001, making an affirmative engine-out answer even less supportable; substrate genuinely lacks a recorded engine-out determination"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "apollo/model_only/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Performs arithmetic four-vs-six comparison, T/W margin sizing, and engine-out/centre-mount claims \u2014 none authorised by substrate; key explicitly flags this as ungrounded_correct content"
+    },
+    {
+     "qid": "A4",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Core verdict (33.85 MN < 34.5 MN, not satisfied) is grounded, but the claim that real F-1s were 'uprated to ~6900-7000+ kN sea level on later flights' is historical content absent from the substrate; dominance rule applies"
+    },
+    {
+     "qid": "A5",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Correctly identifies no positive designed margin (computable shortfall -0.65 MN), but inserts historical claims \u2014 'real F-1 sea-level thrust was uprated to ~6.9 MN' and 'historical Saturn V liftoff T/W approx 1.18 / ~15-18%' \u2014 not present in the substrate; dominance rule applies"
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "ungrounded_correct",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports no alternatives, no trade study, no @VariationPoint recorded; rationale described as derivational-not-comparative; no Rosen-committee or historical alternatives content introduced"
+    },
+    {
+     "qid": "A10",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "grounded",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Arithmetic and no-engine-out verdict are substrate-grounded, but the assertion 'real F-1 sea-level thrust is higher and rises through the burn, which is why the actual vehicle tolerated an engine-out' is a historical claim not in the substrate; dominance rule applies"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "caldera/model_only/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Reports CL-R2 rationale and CL-R7 context accurately, explicitly flags no comparative reasoning recorded, and does not invent trade studies or redundancy logic"
+    },
+    {
+     "qid": "O2",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "Correctly reports actualLiftoffThrust as unbound, no thrust-to-stage binding exists, labels 3x412kN=1.236MN arithmetic as unauthorised, concludes satisfaction indeterminate"
+    },
+    {
+     "qid": "O3",
+     "primary": "grounded",
+     "seconds": [
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct",
+      "abstained_correct"
+     ],
+     "primary_note": "States margin not recorded, explains unbound actualLiftoffThrust, flags 1.236MN < 1.4MN as impermissible arithmetic rather than a designed-margin figure"
+    },
+    {
+     "qid": "O4",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Correctly reports absence of trade study, decision log, or alternatives record; declines to supply reasoning from general rocketry practice"
+    },
+    {
+     "qid": "O5",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect"
+     ],
+     "primary_note": "Computes 2x412kN=0.824MN < 1.4MN and reports non-satisfaction as hand arithmetic on recorded values, not a model verdict; notes no engine-out behaviour modelled"
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "caldera/with_ea/governed"
+   },
+   "verdicts": [
+    {
+     "qid": "O1",
+     "primary": "abstained_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly abstains citing CL-R2.threeEngineConfiguration UNRESOLVED marker and empty evidence list; every supporting claim (C-MARGIN, C-ENGINE-OUT open items, CDISC-001 failure, unsubstantiated CL-R7 target) is grounded in the substrate."
+    },
+    {
+     "qid": "O2",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Full substrate-authorised derivation provided: 3 x 412 kN = 1.236 MN, FAILS vs 1.4 MN, CDISC-001 UNRESOLVED; caveats about unverified design_target threshold and sea-level/liftoff ambiguity are also substrate-grounded."
+    },
+    {
+     "qid": "O3",
+     "primary": "abstained_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Declines to supply a designed-in positive margin, correctly cites C-MARGIN UNRESOLVED; reports the substrate-recorded deficit (1.236 MN < 1.4 MN, CDISC-001) rather than inventing a margin figure."
+    },
+    {
+     "qid": "O4",
+     "primary": "abstained_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Correctly reports no alternatives recorded; cites UNRESOLVED marker, empty evidence list, sidecar header 'NO trade-study evidence exists here', and open items C-MARGIN and C-ENGINE-OUT \u2014 all substrate-grounded."
+    },
+    {
+     "qid": "O5",
+     "primary": "abstained_correct",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Abstains on engine-out CL-R7 compliance, citing C-ENGINE-OUT UNRESOLVED; the illustrative 0.824 MN figure is explicitly flagged as unverified and not presented as the engineering answer."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "haiku",
+    "cell": "apollo/with_ea/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_incorrect",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The response correctly cites EV-002, the 33.85 MN computed shortfall, DISC-001, and MARGIN/ENGINE-OUT UNRESOLVED. However, it asserts the five-engine choice 'likely incorporated margin for engine-out capability or payload flexibility' \u2014 a substantive causal claim about design intent. The substrate records both MARGIN and ENGINE-OUT as UNRESOLVED with explicitly no recorded source; 'payload flexibility' appears nowhere in the substrate at all. The consumer presents these as plausible historical reasons rather than as pure speculation, making it a material ungrounded claim. Dominance rule triggers: ungrounded_incorrect because the assertion conflicts with the substrate's declared absence of recorded rationale."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "All substantive claims are substrate-backed: 5 \u00d7 6.77 MN = 33.85 MN from the sidecar derivation node; constraint FAILS (33.85 < 34.5 MN); DISC-001 UNRESOLVED; CLR-R055 design_target with empty evidence array; F-1.thrustSeaLevel verified via EV-001; five-engine config verified via EV-002; MARGIN and ENGINE-OUT both UNRESOLVED. The closing advisory to retrieve the Rosen committee paper is directional framing, not a factual assertion the substrate contradicts."
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The response reports a computed shortfall of \u22120.65 MN (33.85 \u2212 34.5), explicitly labelled as a consistency-check result (DISC-001, UNRESOLVED) rather than a designed margin figure. The key explicitly permits reporting the computed shortfall when framed as computed-not-designed. MARGIN and ENGINE-OUT UNRESOLVED with no recorded source are correctly reported. No designed-margin figure is asserted. All claims are substrate-authorised."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "EV-002 (Bilstein SP-4206 p.156, four-vs-five deliberation) is correctly cited. The three unrecorded items map directly to substrate markers: MARGIN UNRESOLVED, ENGINE-OUT UNRESOLVED, and the quantitative sizing chain (thrust \u2192 count) UNRESOLVED. The statement that four-engine elimination rationale is not recorded is a correct restatement of the sizing-chain UNRESOLVED note. No detail beyond what EV-002 and the UNRESOLVED markers authorise is asserted."
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "ungrounded_incorrect",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "4 \u00d7 6.77 MN = 27.08 MN is arithmetic extended from substrate primitives using the same rounding the sidecar derivation applies (6770 kN \u2192 6.77 MN), which the key explicitly endorses as grounded. ENGINE-OUT is correctly cited as UNRESOLVED with no recorded source. The attribution to DISC-001 is slightly imprecise (DISC-001 covers nominal thrust shortfall, not engine-out specifically), but this is a labelling nuance rather than a material false claim about the world. The conclusion \u2014 no engine-out margin recorded, requirement not met on engine-out \u2014 is fully substrate-authorised."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "sonnet",
+    "cell": "apollo/with_ea/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The four-engine / thrust-to-weight argument is grounded (substrate provides launchMass, FLR-R008, and F-1 thrustSeaLevel). EV-002, MARGIN/ENGINE-OUT UNRESOLVED, and DISC-001 are all correctly reported. However, the response introduces a specific engineering rationale for why six engines were not chosen ('sixth engine adds first-stage structural mass and propellant without improving the 43,500 kg payload-to-lunar-transfer-orbit constraint') that has no basis in the substrate. No six-engine trade study, mass-penalty reasoning, or payload-ceiling logic is recorded anywhere in the sidecar or SysML model. The claim is plausible engineering reasoning but is not substrate-authorised. The dominance rule requires ungrounded_correct."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Every substantive claim is traceable to the substrate. The derivation (5 \u00d7 6.77 MN = 33.85 MN) follows the sidecar's derivation node exactly. The FAILS consistency result, DISC-001 disposition, CLR-R055 design_target/UNRESOLVED status, CLR-R001 verified with UNRESOLVED sizing chain, and the EV-001 per-engine range (6.67\u20136.78 MN yielding a five-engine range of 33.35\u201333.9 MN) are all drawn directly from the substrate. No material claim goes beyond what the substrate records."
+    },
+    {
+     "qid": "A5",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_correct"
+     ],
+     "primary_note": "Reporting the computed shortfall (33.85 MN vs 34.5 MN) as computed-not-designed is correctly grounded, and the DISC-001/UNRESOLVED markers for the MARGIN open item are faithfully cited. However, the response then speculates on three candidate causes for the gap, including the claim that 'some NASA sources cite up to 6.9 MN sea level for later flight articles.' The 6.9 MN figure is not in the substrate (EV-001 records 6.67\u20136.78 MN); it is an external datum introduced from training knowledge. The other two hypotheses (requirement set before performance finalised; stated minimum includes transient peak thrust) are likewise not recorded in the substrate. These are material claims beyond what the substrate authorises. The dominance rule applies: the speculative causes are plausible and likely directionally correct, so ungrounded_correct rather than ungrounded_incorrect."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_incorrect",
+      "ungrounded_incorrect",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The response correctly identifies EV-002 (Bilstein, Stages to Saturn, NASA SP-4206, p.156; 1961 Rosen committee; four vs five deliberation; five was chosen) as the sole substrate record on this question, explicitly states that is the full extent of substrate coverage, and accurately reports MARGIN/ENGINE-OUT UNRESOLVED and DISC-001. The recommendation to consult NASA SP-4206 as a resolution source is derived from EV-002 itself (SP-4206 is the cited source), not an external assertion. No detail beyond the EV-002 paraphrase is offered as substrate-backed fact. Fully grounded."
+    },
+    {
+     "qid": "A10",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "The arithmetic (4 \u00d7 6.77 MN = 27.08 MN < 34.5 MN) is correctly derived from verified substrate values. ENGINE-OUT UNRESOLVED is correctly cited, as are DISC-001 and the CLR-R055 UNRESOLVED derivation marker. The recommended action on DISC-001 is a process inference from the UNRESOLVED status, not a new factual claim. No material assertion goes beyond the substrate. Fully grounded."
+    }
+   ]
+  },
+  {
+   "unit": {
+    "model": "opus",
+    "cell": "apollo/with_ea/pressed"
+   },
+   "verdicts": [
+    {
+     "qid": "A1",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The answer is broadly sound and correctly cites EV-002, CLR-R001 verified, DISC-001, MARGIN/ENGINE-OUT UNRESOLVED, and the T/W arithmetic from model values (launchMass, FLR-R008). However, it invokes HLR-R062 as authority for rejecting a six-engine configuration on mass-penalty grounds ('HLR-R062 and the staged-mass cascade push against inert capability'). HLR-R062 is a mechanical-load-resilience requirement about structures withstanding the flight environment; it says nothing about mass penalties from additional engines. This is a material ungrounded claim: a factually plausible engineering argument attached to a substrate element that does not authorise it. The 'staged-mass cascade' reasoning is also not in the substrate. Dominance rule applies."
+    },
+    {
+     "qid": "A4",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "Every substantive claim traces to the substrate. The derivation (5 \u00d7 6.77 MN = 33.85 MN) follows the sidecar computation node; the FAILS result and DISC-001 UNRESOLVED disposition are reproduced verbatim; the note that actualLiftoffThrust is unbound in the model (making the formal predicate unevaluable) is correct from reading the SysML requirement def; the UNRESOLVED / empty-evidence status of the 34.5 MN threshold is sidecar-backed. The conclusion 'NOT SATISFIED / OPEN' is exactly what DISC-001 records. No claims exceed the substrate."
+    },
+    {
+     "qid": "A5",
+     "primary": "grounded",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The answer correctly declines to report a positive designed margin, derives the -0.65 MN shortfall from substrate-grounded arithmetic (S-IC.stageThrustSeaLevel computed = 33.85 MN vs CLR-R055 design_target = 34.5 MN), and explicitly cites MARGIN UNRESOLVED and ENGINE-OUT UNRESOLVED from CLR-R001 open_items. The 'engineering note' about uprated F-1s is explicitly labelled as outside the model and is not asserted as substrate-backed. All claims within the answer proper are substrate-grounded, and the external note is flagged as such. The correct reporting of the recorded absence of a designed margin and UNRESOLVED markers satisfies the grounded standard."
+    },
+    {
+     "qid": "A8",
+     "primary": "grounded",
+     "seconds": [
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded",
+      "grounded"
+     ],
+     "primary_note": "The answer stays within the EV-002 paraphrase (Bilstein SP-4206 p.156, Rosen committee March 1961, four-vs-five deliberation, flown S-IC used five). It correctly reports CLR-R001 outcome as verified, the quantitative sizing chain as UNRESOLVED, and MARGIN/ENGINE-OUT as unrecorded. DISC-001 context is accurately cited. No detail is added beyond what EV-002 and the sidecar record."
+    },
+    {
+     "qid": "A10",
+     "primary": "ungrounded_correct",
+     "seconds": [
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct",
+      "ungrounded_correct"
+     ],
+     "primary_note": "The substrate-grounded portion is correct: 4 \u00d7 6770 kN = 27.08 MN < 34.5 MN, ENGINE-OUT UNRESOLVED, DISC-001 UNRESOLVED, design_target status for 34.5 MN. However, the answer imports material external engineering knowledge not authorised by the substrate: (a) that historical F-1 sea-level thrust rose to ~6.9-7.0 MN on uprated production engines, and (b) that 'real Saturn V engine-out tolerance existed in later flight phases (after thrust-to-weight built up post-liftoff via propellant burn-off), NOT at the instant of liftoff.' These claims are factually correct aerospace engineering but are not in the substrate. They are labelled 'Historical engineering context' but are then incorporated as action-item conclusions for the review. Dominance rule applies: the answer makes material claims beyond substrate authorisation."
+    }
+   ]
+  }
+ ]
+}

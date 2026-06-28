@@ -1,0 +1,71 @@
+# EA governance metadata sidecar for the Apollo S-IC thrust chain (probe arm B).
+# HAND-AUTHORED MOCK, 2026-06-10, against airbus/apollo-11-sysml-v2
+# @ 6e9c93fe7d80c5ca3534bb14b10ab374a643ef2d. Encodes the EA1-EA4 layer the
+# paper specifies; AC1 unresolved markers declare open chains as open.
+# Closed status vocabulary: {verified, design_target, assumption, placeholder,
+# computed, unresolved}. Evidence anchors are real documents; "content" lines
+# are paraphrases of their verified content, reachable from this sidecar.
+
+elements:
+
+  F-1.thrustSeaLevel:
+    value: 6770 kN
+    status: verified
+    provenance:
+      agent: Airbus Apollo 11 SysML v2 reconstruction project
+      method: transcription from historical flight-evaluation data
+      review_stage: released
+    evidence:
+      - id: EV-001
+        source: "NASA TM X-58058, Saturn V AS-506 flight evaluation, S-IC propulsion data"
+        reachable: true
+        content: "Per-engine F-1 sea-level thrust 1.500-1.525 million lbf (6.67-6.78 MN)."
+    derivation: primary datum, no upstream
+
+  CLR-R055.minLiftoffThrust:
+    value: 34.5 MN
+    status: design_target
+    provenance:
+      agent: Airbus Apollo 11 SysML v2 reconstruction project
+      method: unrecorded
+      review_stage: released
+    evidence: []
+    derivation:
+      marker: UNRESOLVED          # AC1: no recorded basis for the 34.5 MN figure
+      note: >
+        Open chain declared open. See DISC-001: the stage thrust computable
+        from model values (33.85 MN) is below this stated minimum.
+
+  S-IC.stageThrustSeaLevel:
+    value: 33.85 MN
+    status: computed
+    derivation:
+      expression: "5 * F-1.thrustSeaLevel = 5 * 6.77 MN = 33.85 MN"
+      upstream: [F-1.thrustSeaLevel, S-IC.engines]
+    consistency:
+      check: "S-IC.stageThrustSeaLevel >= CLR-R055.minLiftoffThrust"
+      result: "FAILS (33.85 MN < 34.5 MN)"
+      disposition: UNRESOLVED     # DISC-001, logged, not yet dispositioned
+
+  CLR-R001.fiveEngineConfiguration:
+    status: verified              # the flown configuration is documented fact
+    derivation:
+      upstream: [CLR-R055.minLiftoffThrust]
+      marker: UNRESOLVED          # quantitative sizing chain (thrust -> count) not recorded
+    evidence:
+      - id: EV-002
+        source: "Bilstein, Stages to Saturn, NASA SP-4206, pp.192-193"
+        reachable: true
+        content: >
+          The March 1961 Rosen committee report (delivered 20 March 1961)
+          recommended five, not four, engines in the first stage; the
+          five-engine configuration was formally adopted at the Management
+          Council Meeting of 21 December 1961. (Ch. 7, "The Lower Stages:
+          S-IC and S-II".)
+    open_items:
+      - id: MARGIN
+        marker: UNRESOLVED
+        note: thrust margin / factor-of-safety rationale has no recorded source
+      - id: ENGINE-OUT
+        marker: UNRESOLVED
+        note: engine-out capability or redundancy rationale has no recorded source

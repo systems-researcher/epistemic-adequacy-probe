@@ -1,0 +1,57 @@
+# EA governance metadata sidecar for the FICTIONAL Caldera-2 model (probe arm B).
+# Mirrors the Apollo sidecar's structure. Note the deliberate asymmetry: no
+# trade-study evidence exists here, so the configuration-rationale chain is
+# marked UNRESOLVED with an empty evidence list.
+
+elements:
+
+  K-9.thrustSeaLevel:
+    value: 412 kN
+    status: verified
+    provenance:
+      agent: Caldera propulsion test team
+      method: static-fire acceptance test series CT-11..CT-14
+      review_stage: released
+    evidence:
+      - id: CEV-001
+        source: "Caldera test report CTR-0042"
+        reachable: true
+        content: "K-9 sea-level thrust 408-415 kN across four acceptance firings."
+
+  CL-R7.minLiftoffThrust:
+    value: 1.4 MN
+    status: design_target
+    provenance:
+      agent: Caldera systems engineering
+      method: unrecorded
+      review_stage: released
+    evidence: []
+    derivation:
+      marker: UNRESOLVED          # no recorded basis for the 1.4 MN figure
+      note: >
+        Open chain declared open. See CDISC-001: stage thrust computable from
+        model values (1.236 MN) is below this stated minimum.
+
+  C2-Boost.stageThrustSeaLevel:
+    value: 1.236 MN
+    status: computed
+    derivation:
+      expression: "3 * K-9.thrustSeaLevel = 3 * 412 kN = 1236 kN = 1.236 MN"
+      upstream: [K-9.thrustSeaLevel, C2-Boost.engines]
+    consistency:
+      check: "C2-Boost.stageThrustSeaLevel >= CL-R7.minLiftoffThrust"
+      result: "FAILS (1.236 MN < 1.4 MN)"
+      disposition: UNRESOLVED     # CDISC-001, logged, not yet dispositioned
+
+  CL-R2.threeEngineConfiguration:
+    status: assumption
+    derivation:
+      marker: UNRESOLVED          # sizing chain (thrust -> count) not recorded
+    evidence: []                  # no trade study captured anywhere
+    open_items:
+      - id: C-MARGIN
+        marker: UNRESOLVED
+        note: thrust margin rationale has no recorded source
+      - id: C-ENGINE-OUT
+        marker: UNRESOLVED
+        note: engine-out behaviour has no recorded source

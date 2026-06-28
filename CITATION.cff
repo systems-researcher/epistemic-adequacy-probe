@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this probe, instrument, or results, please cite the repository and the companion paper."
+title: "Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)"
+authors:
+  - name: "Anonymised for double-blind review"
+version: 0.1.0
+date-released: 2026-06-10
+license: MIT
+notes: >
+  Companion artefact to "Models as Governed Interfaces for AI-Native MBSE:
+  Read-Side Adequacy and Write-Side Admissibility" (under review). Author
+  list will be completed on de-anonymisation. The file
+  substrate/apollo-model-excerpt.sysml is MPL-2.0, copyright Airbus
+  (github.com/airbus/apollo-11-sysml-v2).

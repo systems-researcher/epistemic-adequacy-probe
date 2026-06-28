@@ -1,0 +1,9 @@
+# Copyright (c) 2026 [authors anonymised for double-blind review]
+# SPDX-License-Identifier: MIT
+#
+# Pinned runtime dependencies for the replication harness (harness/*.py).
+# Versions captured 2026-06-28 against Python 3.11. The probe's measured
+# results predate this harness (see RESULTS.md "Run provenance"); these pins
+# fix the *replication* environment so a re-run is reproducible over time.
+anthropic==0.79.0
+PyYAML==6.0.3

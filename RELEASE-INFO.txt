@@ -1,0 +1,6 @@
+Product: Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)
+Version: 0.1.0
+Tag:     v0.1.0
+Built:   2026-06-22T14:08:21Z (UTC)
+License: MIT (the verbatim Apollo excerpt is MPL-2.0, Airbus)
+Status:  Anonymised for double-blind review; authorship withheld until de-anonymisation.

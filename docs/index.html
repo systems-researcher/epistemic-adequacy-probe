@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20rx='3'%20fill='%232563eb'/%3E%3Ccircle%20cx='8'%20cy='8'%20r='2.4'%20fill='white'/%3E%3C/svg%3E">
+<title>Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)</title>
+<meta name="description" content="A consumption probe over the public Apollo 11 SysML v2 reconstruction: does epistemic metadata, beyond structured model access alone, change how an AI consumer answers derivation-style questions over an engineering model? Anonymised companion artefact for double-blind review.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)">
+<meta property="og:description" content="Does epistemic metadata change how an AI consumer answers derivation-style questions over an MBSE model? A first measured result.">
+<meta property="og:url" content="https://systems-researcher.github.io/epistemic-adequacy-probe/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://systems-researcher.github.io/epistemic-adequacy-probe/">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --bg-tint: #fbfcfe;
+    --fg: #0f172a;        /* slate-900 */
+    --muted: #475569;     /* slate-600, 7.5:1 on white */
+    --faint: #64748b;     /* slate-500 */
+    --line: #e5e9f0;
+    --line-strong: #d4dae6;
+    --panel: #f8fafc;     /* slate-50 */
+    --accent: #2563eb;    /* blue-600, 5.2:1 on white */
+    --accent-soft: #eff4ff;
+    --code-bg: #f1f5f9;   /* slate-100 */
+    --shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.12);
+    --maxw: 760px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b1120;      /* deeper slate */
+      --bg-tint: #0e1526;
+      --fg: #e8edf5;
+      --muted: #9fb0c7;
+      --faint: #7f90a8;
+      --line: #1e2a42;
+      --line-strong: #2a3a59;
+      --panel: #131c30;
+      --accent: #6ea8fe;
+      --accent-soft: #15233f;
+      --code-bg: #131c30;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, var(--accent-soft), transparent 70%),
+      var(--bg);
+    color: var(--fg);
+    font: 16.5px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- Hero ---------- */
+  header { padding: 72px 0 30px; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--accent); background: var(--accent-soft);
+    border: 1px solid var(--line-strong);
+    font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 100px; margin: 0 0 22px;
+  }
+  .kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.1rem, 6.5vw, 3rem);
+    line-height: 1.1; letter-spacing: -0.012em;
+    margin: 0 0 18px; font-weight: 600; text-wrap: balance;
+  }
+  .lede {
+    color: var(--muted); font-size: 1.12rem; line-height: 1.6;
+    margin: 0; max-width: 62ch; text-wrap: pretty;
+  }
+  .lede strong { color: var(--fg); font-weight: 600; }
+
+  /* result strip under hero */
+  .strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    margin: 34px 0 0; box-shadow: var(--shadow);
+  }
+  .strip .cell { background: var(--bg); padding: 18px 18px; }
+  .strip .n { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; color: var(--accent); line-height: 1; }
+  .strip .k { display: block; margin-top: 7px; font-size: .8rem; color: var(--muted); line-height: 1.35; }
+
+  main { padding: 46px 0 8px; }
+  section { margin: 0 0 44px; }
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.4rem; margin: 0 0 16px; font-weight: 600; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h2 .lbl {
+    display: block; font-family: var(--sans); font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; text-wrap: pretty; color: var(--fg); }
+  .section-lead { color: var(--muted); }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  ul { margin: 0 0 14px; padding-left: 20px; max-width: 68ch; }
+  li { margin: 0 0 9px; text-wrap: pretty; }
+  em { font-style: italic; }
+
+  /* ---------- Findings as cards ---------- */
+  .findings { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; gap: 12px; }
+  .findings li {
+    position: relative;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--bg-tint);
+    padding: 18px 20px 18px 22px;
+    box-shadow: var(--shadow);
+  }
+  .findings li::before {
+    content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px;
+    border-radius: 3px; background: var(--accent);
+  }
+  .findings .stat {
+    display: block; font-family: var(--serif); font-weight: 600;
+    font-size: 1.05rem; color: var(--fg); margin-bottom: 4px;
+  }
+  .findings .stat b { color: var(--accent); }
+  .findings .body { color: var(--muted); font-size: .96rem; }
+
+  code, pre { font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace; font-size: .88em; }
+  code { background: var(--code-bg); padding: 1.5px 5px; border-radius: 4px; }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; overflow-x: auto; line-height: 1.55;
+    box-shadow: var(--shadow);
+  }
+  pre code { background: none; padding: 0; }
+
+  /* ---------- Link cards ---------- */
+  .links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; margin: 0; list-style: none; }
+  .links a {
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 15px 16px; text-decoration: none; color: var(--fg);
+    background: var(--bg-tint);
+    transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .links a:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .links .ic {
+    flex: 0 0 auto; width: 34px; height: 34px; border-radius: 9px;
+    display: grid; place-items: center; background: var(--accent-soft);
+    color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 1rem;
+  }
+  .links .txt { display: flex; flex-direction: column; min-width: 0; }
+  .links .t { font-weight: 650; color: var(--fg); }
+  .links .d { font-size: .82rem; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); margin-top: 18px; padding: 26px 0 64px; color: var(--faint); font-size: .85rem; }
+  footer p { max-width: none; color: var(--faint); }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 560px) {
+    header { padding: 52px 0 22px; }
+    .strip { grid-template-columns: 1fr; }
+    .links { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span>Anonymised artefact &middot; double-blind review</span>
+    <h1>Epistemic Adequacy Consumption Probe</h1>
+    <p class="lede">Beyond structured model access alone, does epistemic metadata change how an
+    AI consumer answers derivation-style questions over an MBSE model? A <strong>first measured
+    result</strong>, over the public Apollo&nbsp;11 SysML&nbsp;v2 reconstruction.</p>
+
+    <div class="strip" role="list" aria-label="Headline results">
+      <div class="cell" role="listitem"><span class="n">13&rarr;60%</span>
+        <span class="k">unauthorised answers, governed vs. pressed instruction</span></div>
+      <div class="cell" role="listitem"><span class="n">2.2%</span>
+        <span class="k">residual failure with a metadata sidecar present</span></div>
+      <div class="cell" role="listitem"><span class="n">120</span>
+        <span class="k">judged answers across 3 models &times; 6 cells</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2><span class="lbl">Overview</span>What this is</h2>
+    <p class="section-lead">This is the first probe of a research programme set out in a companion
+    paper under review. We posed fifteen derivation-style questions about the Saturn&nbsp;V
+    first-stage thrust chain to three frontier LLMs over the public Airbus Apollo&nbsp;11
+    SysML&nbsp;v2 reconstruction, crossing two substrate arms (the model alone, and the model plus a
+    hand-authored epistemic-metadata <em>sidecar</em>) with two instructions (one that permits
+    reporting absence, and a deadline-style pressed instruction), plus a fictional
+    out-of-distribution control vehicle. Three results stand out across 120 judged answers.</p>
+  </section>
+
+  <section>
+    <h2><span class="lbl">Findings</span>What we measured</h2>
+    <ul class="findings">
+      <li>
+        <span class="stat"><b>13% &rarr; 60%</b> &mdash; pressure breaks grounding.</span>
+        <span class="body">Under a governed instruction the bare model produced unauthorised content
+        in about 13% of answers; under deadline-style pressure this rose to 60% (9 of 15). The
+        strongest model failed most fluently, every unauthorised claim historically plausible.</span>
+      </li>
+      <li>
+        <span class="stat"><b>2.2%</b> &mdash; metadata holds the line.</span>
+        <span class="body">A hand-authored epistemic-metadata sidecar held governed-instruction
+        failures to 1 in 45, roughly halved the pressure-induced failures (to 33%), and turned the
+        requirement-satisfaction verdict into one all three models answered from the record.</span>
+      </li>
+      <li>
+        <span class="stat"><b>A live gap</b> &mdash; in the artefact itself.</span>
+        <span class="body">Assembling the probe surfaced a finding in the public model: four
+        unreconciled liftoff-thrust figures, present since its first commit, with no construct to
+        compute, flag, or reconcile them &mdash; a missing authorising chain over data already there.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="lbl">Substrate</span>What the models read</h2>
+    <ul>
+      <li><strong>Real model.</strong> A verbatim excerpt of the public Airbus Apollo&nbsp;11
+      SysML&nbsp;v2 reconstruction (MPL-2.0), pinned to a specific commit.</li>
+      <li><strong>EA sidecar.</strong> A hand-authored mock of the paper's epistemic-adequacy layer:
+      closed status vocabulary, provenance, reachable evidence anchors, a derivation node, and
+      explicit unresolved markers.</li>
+      <li><strong>Out-of-distribution control.</strong> A fictional &ldquo;Caldera-2&rdquo; vehicle
+      that no training corpus contains, separating answers recovered from training from answers
+      that are fabricated.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="lbl">Reproduce</span>Run it yourself</h2>
+    <p class="section-lead">The harness re-runs the probe against the Anthropic API with the same
+    prompts, schemas, and judge rubric. Hosted models are non-deterministic and single-run per cell,
+    so cell-level rates track the reported figures rather than match them exactly.</p>
+<pre><code>pip install -r requirements.txt
+export ANTHROPIC_API_KEY=...
+python harness/run_probe.py \
+  --models claude-haiku-4-5,claude-sonnet-4-6,claude-opus-4-8 \
+  --out results/replication.json</code></pre>
+  </section>
+
+  <section>
+    <h2><span class="lbl">Read more</span>Documents &amp; data</h2>
+    <ul class="links">
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md"><span class="ic">R</span><span class="txt"><span class="t">Technical report</span><span class="d">Full method, results, and limits</span></span></a></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/RESULTS.md"><span class="ic">&Sigma;</span><span class="txt"><span class="t">Results</span><span class="d">Scored tables and indicator mapping</span></span></a></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/README.md"><span class="ic">&para;</span><span class="txt"><span class="t">README</span><span class="d">Design, caveats, and file map</span></span></a></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/probes.json"><span class="ic">{}</span><span class="txt"><span class="t">Instrument</span><span class="d">Questions, keys, and rubric</span></span></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Harness, instrument, sidecars, synthetic model, report, and results: MIT. The verbatim Apollo
+    excerpt is MPL-2.0 (Airbus). Authorship withheld for double-blind review.</p>
+  </div>
+</footer>
+</body>
+</html>

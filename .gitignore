@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+results/replication*.json
+
+# Local QA artefacts (not shipped)
+.playwright-mcp/
+probe-*.png

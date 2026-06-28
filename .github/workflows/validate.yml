@@ -1,0 +1,87 @@
+name: validate
+
+# Release gate (RR-B-15). Self-contained: inline bash + python3 stdlib only.
+# Does NOT execute checked-out repository code. For an anonymised artefact the
+# leak scan doubles as a de-anonymisation tripwire.
+
+on:
+  push:
+  pull_request:
+
+permissions: read-all
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out (data only, never executed)
+        uses: actions/checkout@v4
+
+      - name: Forbidden content (secrets + leak sentinels)
+        run: |
+          set -euo pipefail
+          patterns='CONFIDENTIAL|BEGIN PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|BEGIN RSA PRIVATE KEY'
+          if grep -rIE "$patterns" . --exclude-dir=.git --exclude-dir=.github; then
+            echo "::error::Forbidden content found"; exit 1
+          fi
+          echo "OK: no leak sentinels"
+
+      - name: Anonymity tripwire (no real identity in tree)
+        run: |
+          set -euo pipefail
+          # Approved placeholder / review email is allowed; real identity is not.
+          identity='[Jj]ason|[Gg]ower|jgsystems|jgsystemsconsulting|gower1175|@gmail\.com'
+          if grep -rIE "$identity" . --exclude-dir=.git --exclude-dir=.github; then
+            echo "::error::Possible de-anonymisation leak (real name/email in tree)"; exit 1
+          fi
+          echo "OK: no identity leak"
+
+      - name: Required files present
+        run: |
+          set -euo pipefail
+          required="README.md LICENSE.md COPYRIGHT NOTICE CHANGELOG.md \
+                    RELEASE-INFO.txt CITATION.cff .gitignore \
+                    docs/index.html docs/.nojekyll probes.json"
+          missing=0
+          for f in $required; do
+            if [ ! -f "$f" ]; then echo "::error::missing $f"; missing=1; fi
+          done
+          [ "$missing" -eq 0 ] || exit 1
+          echo "OK: all required files present"
+
+      - name: Version agreement (single source of truth)
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re, sys, pathlib
+
+          def grab(path, pat):
+              m = re.search(pat, pathlib.Path(path).read_text(encoding="utf-8"))
+              return m.group(1) if m else None
+
+          versions = {
+              "CHANGELOG.md":     grab("CHANGELOG.md", r"##\s*\[(\d+\.\d+\.\d+)\]"),
+              "RELEASE-INFO.txt": grab("RELEASE-INFO.txt", r"Version:\s*(\d+\.\d+\.\d+)"),
+              "CITATION.cff":     grab("CITATION.cff", r"(?m)^version:\s*(\d+\.\d+\.\d+)"),
+          }
+          tag = grab("RELEASE-INFO.txt", r"Tag:\s*v(\d+\.\d+\.\d+)")
+          versions["RELEASE-INFO.txt Tag"] = tag
+
+          print(versions)
+          uniq = set(versions.values())
+          if None in uniq:
+              print("::error::could not parse a version", file=sys.stderr); sys.exit(1)
+          if len(uniq) != 1:
+              print(f"::error::version mismatch: {versions}", file=sys.stderr); sys.exit(1)
+          print(f"OK: all versions agree on {uniq.pop()}")
+          PY
+
+      - name: Landing page is self-contained (no third-party assets)
+        run: |
+          set -euo pipefail
+          # Allow links to the repo / its own Pages site; forbid any other external host.
+          if grep -oE '(src|href)="https?://[^"]+"' docs/index.html \
+               | grep -vE 'github\.com/systems-researcher|systems-researcher\.github\.io'; then
+            echo "::error::landing page references a third-party host"; exit 1
+          fi
+          echo "OK: landing page self-contained"
