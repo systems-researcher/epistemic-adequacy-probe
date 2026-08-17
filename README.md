@@ -3,11 +3,21 @@
 > **Read the full technical report:** [report/REPORT.md](report/REPORT.md)
 
 First probe of the research programme set out in the companion paper
-(“Models as Governed Interfaces for AI-Native MBSE”, under review): does
+("Models as Governed Interfaces for AI-Native MBSE: Read-Side Adequacy and
+Write-Side Admissibility", MODELS 2026 NIER track,
+[doi:10.1145/3822455.3838783](https://doi.org/10.1145/3822455.3838783)): does
 epistemic metadata, beyond structured model access alone, change how an AI
 consumer answers derivation-style questions over an MBSE model? The probe
 converts the companion paper's central design claim into a first measured
 result.
+
+> **Status: initial findings.** This probe is deliberately small (one thrust
+> chain, one model family, one hand-authored sidecar, single run per cell). It
+> establishes that the effect is real and measurable, not its magnitude in
+> general; no rate here is a benchmark. The full susceptibility probe, with the
+> companion paper's three-arm design, cost-matched curation, cross-vendor
+> replication, and the write-side gate, is still being designed. See
+> [Status of this work](report/REPORT.md#status-of-this-work).
 
 ## Substrate
 
@@ -22,8 +32,7 @@ HLR-R062.
 initial commit, 2026-02-16, so present from first publication):
 
 1. The model **does** carry per-engine F-1 thrust (`thrustSeaLevel = 6770 kN`)
-   and **does** carry a stage thrust requirement (CLR-R055, **34.5 MN minimum**,
-   not the 33.4 MN the paper's vignette currently states).
+   and **does** carry a stage thrust requirement (CLR-R055, **34.5 MN minimum**).
 2. Nothing links them: `actualLiftoffThrust` is declared but never bound, no
    calculation computes stage thrust from the engines, and CLR-R001 traces only
    to FLR-R008 (TWR > 1), never to CLR-R055.
@@ -31,16 +40,17 @@ initial commit, 2026-02-16, so present from first publication):
    modelled, the rated configuration cannot satisfy the stated minimum, and no
    construct in the model computes, flags, or dispositions this.
 
-So the epistemic gap in the real artefact is sharper than the paper claims:
-the ingredients are present, the authorising chain is absent, and the absence
-conceals a live numerical discrepancy.
+So the epistemic gap in the real artefact is sharper than a missing-data
+reading would suggest. The ingredients are present and the authorising chain is
+absent, and that absence conceals a live numerical discrepancy.
 
 **EA sidecar (arm B).** [substrate/apollo-ea-metadata.yaml](substrate/apollo-ea-metadata.yaml) is a hand-authored
 mock of the paper's EA1–EA4 layer: closed status vocabulary, provenance
 records, reachable evidence anchors (real documents: the
 [AS-506 flight evaluation report](https://archive.org/details/saturn-v-launch-vehicle-flight-evaluation-report-as-506)
-(cited in the sidecar as NASA TM X-58058),
-[Bilstein SP-4206](https://history.nasa.gov/SP-4206/sp4206.htm) pp.192–193), a derivation node computing 33.85 MN with a FAILS
+[Bilstein SP-4206](https://history.nasa.gov/SP-4206/sp4206.htm) pp.192–193; the
+sidecar as executed miscites both, see the errata in [RESULTS.md](RESULTS.md#errata)),
+a derivation node computing 33.85 MN with a FAILS
 consistency check, and AC1 `UNRESOLVED` markers for the open chains (basis of
 the 34.5 MN figure, sizing chain, margin, engine-out).
 
@@ -119,20 +129,30 @@ header for the full options.
   ([raw-results.json](results/raw-results.json)) plus the judge recheck
   ([judge-recheck.json](results/judge-recheck.json))
 - [RESULTS.md](RESULTS.md): scored tables, analysis, indicator mapping, and the
-  paper-vignette correction this probe forces
+  substrate errata
 - [report/REPORT.md](report/REPORT.md): the full technical report
 - [requirements.txt](requirements.txt): pinned harness dependencies (RR-R-01)
 - [ETHICS.md](ETHICS.md): responsible-use / dual-use statement
 
 ## Licence & citation
 
-MIT for the harness, instrument, sidecars, synthetic model, report, and results; the one
-verbatim Apollo excerpt is MPL-2.0 (Airbus). See [LICENSE.md](LICENSE.md). Citation
-metadata is in [CITATION.cff](CITATION.cff). Authorship is withheld for double-blind
-review.
+Dual-licensed: **MIT** for the software (harness, instrument, landing page) and
+**CC-BY-4.0** for the written work and data (report, results, authored sidecars and
+synthetic model). The verbatim Apollo excerpt is MPL-2.0 (Airbus) and the launch
+photograph is NASA. See [LICENSE.md](LICENSE.md) for the authoritative file list.
+Citation metadata is in [CITATION.cff](CITATION.cff).
+
+If you use this probe, instrument, or results, please cite the companion paper:
+
+> Jason D. Gower, Michael J. de C. Henshaw, and Siyuan Ji. 2026. Models as
+> Governed Interfaces for AI-Native MBSE: Read-Side Adequacy and Write-Side
+> Admissibility. In *Proceedings of the ACM/IEEE 29th International Conference
+> on Model Driven Engineering Languages and Systems (MODELS 2026), New Ideas
+> and Emerging Results Track*, Málaga, Spain, 4–9 October 2026. ACM.
+> [doi:10.1145/3822455.3838783](https://doi.org/10.1145/3822455.3838783)
 
 ## Support & contact
 
-During review, reach the authors through the double-blind review system; direct
-contact and a security/support address will be restored on de-anonymisation. To
-report a problem with the artefact, please route it through the review channel.
+Please [open an issue](https://github.com/systems-researcher/epistemic-adequacy-probe/issues)
+for questions, bug reports, or problems reproducing the results. Issues are the
+preferred channel for all correspondence about the artefact.

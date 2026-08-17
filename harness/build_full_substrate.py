@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 [authors anonymised for double-blind review]
+# Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 # SPDX-License-Identifier: MIT
 """Build the full-model substrate from a clone of airbus/apollo-11-sysml-v2.
 

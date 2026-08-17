@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 [authors anonymised for double-blind review]
+# Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 # SPDX-License-Identifier: MIT
 """Independent second-judge re-scoring for inter-judge reliability.
 

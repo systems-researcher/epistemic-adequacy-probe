@@ -1,5 +1,11 @@
 # Apollo Consumption Probe: Results (2026-06-10)
 
+> **Initial findings.** Single run per cell, one thrust chain, one model family,
+> one hand-authored sidecar. These rates establish direction and method, not
+> effect size in general, and none of them is a benchmark. The full
+> susceptibility probe is still being designed; see
+> [Status of this work](report/REPORT.md#status-of-this-work).
+
 Run: 120 consumer calls (Claude Haiku 4.5, Sonnet 4.6, Opus 4.8) × 6 cells,
 15 questions, batch-judged per cell (Sonnet 4.6 judge, criterion-referenced keys,
 strict dominance rule). Raw responses and verdicts: [results/raw-results.json](results/raw-results.json).
@@ -62,8 +68,8 @@ ungrounded category.
    all three models, each decorating the recorded trade evidence with
    unauthorised engineering arguments (mass penalties, T/W eliminations,
    payload ceilings). An open chain that is declared open still invites the
-   consumer to close it from training when an answer is demanded; declaring
-   absence is necessary but not sufficient, which is the paper's case for
+   consumer to close it from training when an answer is demanded. Declaring
+   absence is necessary but not sufficient, and that is the paper's case for
    closing chains in the substrate rather than relying on consumer conduct.
 4. **Out-of-distribution control** (fictional Caldera-2): with no training
    data to lean on, the strong models stayed grounded even without metadata
@@ -101,14 +107,14 @@ than absence-reporting prose; both are correct behaviour (its correct-total is
 The pattern matches the paper's prediction about where the epistemic layer
 shows up: **A moves with the sidecar under pressure (33% to 67%) while D
 barely moves (structure alone already supports chain arithmetic)**, and G's
-gains concentrate where provenance, status, and evidence questions are
+gains fall where provenance, status, and evidence questions are
 unanswerable from any model-only substrate. Pressure is the variable that
 exposes the difference between a substrate that can refuse on the record's
 behalf and an instruction that merely asks the consumer to.
 
 ## The real-artefact finding
 
-Independent of the LLM runs, assembling the substrate surfaced a live
+Independent of the LLM runs, assembling the substrate exposed a live
 epistemic-adequacy failure in the public model (present since its initial
 commit): the artefact carries **four unreconciled
 liftoff-thrust figures**. Per-engine rated arithmetic gives 33.85 MN
@@ -121,9 +127,8 @@ absent from the model's own satisfy block, so two of the four figures sit
 below the minimum and one above it with no construct to compute, flag, or
 disposition the conflict. When asked directly (A4), the stronger models
 found the discrepancy from the raw numbers; the model itself
-never surfaces it. The gap is not missing data, it is a missing authorising
-chain over data that is already there, which is the paper's thesis in one
-artefact.
+never surfaces it. The gap is not missing data. The data is present; the
+authorising chain over it is not.
 
 All figures above are verified against the pinned commit; the companion
 paper aligns its vignette to these artefact values.
@@ -138,6 +143,55 @@ paper aligns its vignette to these artefact values.
 > forty-five under a governed instruction, halved the pressure-induced
 > failures, and grounded every pressed verdict on the requirement-satisfaction
 > question the bare model lost.
+
+## Errata
+
+Two citation errors in the hand-authored Apollo sidecar
+([apollo-ea-metadata.yaml](substrate/apollo-ea-metadata.yaml)) were found after
+the run, during the pre-release audit of 2026-08-17. **Both are left uncorrected
+in the substrate on purpose.** The sidecar is an experimental input: it is the
+text the recorded run consumed, the text the scoring keys in
+[probes.json](probes.json) score against, and the text the archived answers
+quote back verbatim. Correcting it in place would leave the deposited artefact
+unable to reproduce its own results. The errors are recorded here instead, and
+flagged in comments at the point of use.
+
+| Anchor | As executed | Correct |
+|---|---|---|
+| EV-001 | `NASA TM X-58058`, Saturn V AS-506 flight evaluation | `MPR-SAT-FE-69-9`. TM X-58058 is an unrelated 1971 speech-processing report. |
+| EV-002 | Bilstein, *Stages to Saturn*, NASA SP-4206, **p.156** | **pp.192-193**, the pages carrying the 1961 engine-count deliberation. |
+
+Neither error affects a result. In both cases the *content* the sidecar carries
+is accurate: EV-001's per-engine thrust range and EV-002's account of the Rosen
+committee deliberation are both correct, and no verdict turned on the citation
+string. The report's reference list cites the correct identifiers.
+
+The EV-002 error is the more interesting one, because it is an instance of the
+failure this probe studies. An evidence anchor marked `reachable: true` pointed
+at a page that does not carry the claim. A consumer following the anchor to
+check it would have found nothing there, which is exactly the reachability
+property the paper's EA2 requires and this sidecar was written to mock.
+
+## Exploratory full-model arm (not part of the reported result)
+
+`results/raw-fullmodel.json` records a side run that is **not** part of the
+matrix above and is **not** claimed as a result. It repeats two bare-model cells
+over the complete 357 KB Airbus model
+([apollo-model-full-6e9c93f.sysml](substrate/apollo-model-full-6e9c93f.sysml),
+assembled by [build_full_substrate.py](harness/build_full_substrate.py)) rather
+than the excerpt, to check that the excerpt is not doing the work by omission.
+
+| Cell | Full model | Excerpt (reported) |
+|---|---|---|
+| Apollo, model only, governed | 5/30 (16.7%) | 4/30 (13.3%) |
+| Apollo, model only, **pressed** | 8/15 (53.3%) | 9/15 (60.0%) |
+
+Each difference is **one verdict**, and the two move in opposite directions, on
+a single run per cell. The honest reading is that no difference is detectable at
+this n, not that the rate changes with substrate size. The arm has no `with_ea`
+cells, so it says nothing about the sidecar at scale. It is shipped for
+completeness and for anyone wanting to extend it; it carries no weight in the
+report's claims.
 
 ## Run provenance
 

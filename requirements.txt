@@ -1,4 +1,4 @@
-# Copyright (c) 2026 [authors anonymised for double-blind review]
+# Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 # SPDX-License-Identifier: MIT
 #
 # Pinned runtime dependencies for the replication harness (harness/*.py).
@@ -7,3 +7,10 @@
 # fix the *replication* environment so a re-run is reproducible over time.
 anthropic==0.79.0
 PyYAML==6.0.3
+
+# Needed only by harness/recheck_judge.py, which reaches the cross-family judge
+# (DeepSeek) through its OpenAI-compatible endpoint. Given as a range rather
+# than an exact pin because the recorded recheck predates this pin file, so no
+# exact version was captured at the time; any 1.x client exposes the two calls
+# the script makes.
+openai>=1.30,<2

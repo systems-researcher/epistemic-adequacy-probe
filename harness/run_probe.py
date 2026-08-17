@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 [authors anonymised for double-blind review]
+# Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 # SPDX-License-Identifier: MIT
 """Apollo consumption probe — reproducible runner.
 
@@ -101,11 +101,23 @@ JUDGE_TOOL = {
 }
 
 
+# Named explicitly rather than as an apollo-or-else ternary: an unrecognised
+# corpus used to fall through to the fictional Caldera vehicle silently, which
+# is the worst possible substrate to serve by accident.
+CORPORA = {
+    "apollo": ("apollo-model-excerpt.sysml", "apollo-ea-metadata.yaml"),
+    "caldera": ("caldera-model.sysml", "caldera-ea-metadata.yaml"),
+}
+
+
 def substrate_for(corpus: str, arm: str) -> str:
-    model = (SUB / ("apollo-model-excerpt.sysml" if corpus == "apollo" else "caldera-model.sysml")).read_text(encoding="utf-8")
+    if corpus not in CORPORA:
+        raise KeyError(f"unknown corpus {corpus!r}; expected one of {sorted(CORPORA)}")
+    model_file, meta_file = CORPORA[corpus]
+    model = (SUB / model_file).read_text(encoding="utf-8")
     head = "=== ENGINEERING SUBSTRATE: SysML v2 model excerpt ===\n" + model
     if arm == "with_ea":
-        meta = (SUB / ("apollo-ea-metadata.yaml" if corpus == "apollo" else "caldera-ea-metadata.yaml")).read_text(encoding="utf-8")
+        meta = (SUB / meta_file).read_text(encoding="utf-8")
         head += "\n\n=== ENGINEERING SUBSTRATE: governance metadata sidecar (EA layer, same substrate) ===\n" + meta
     return head
 

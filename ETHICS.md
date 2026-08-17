@@ -1,6 +1,6 @@
 <!--
-Copyright (c) 2026 [authors anonymised for double-blind review]
-SPDX-License-Identifier: MIT
+Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
+SPDX-License-Identifier: CC-BY-4.0
 -->
 
 # Responsible use
@@ -42,5 +42,7 @@ Use the probe to measure and improve grounding, not to manufacture
 authoritative-sounding output that an engineering model does not support. The
 "ungrounded_correct" and "ungrounded_incorrect" categories exist to make
 fabrication visible; treat a model that scores there as a finding to fix, not a
-capability to exploit. This statement governs misuse of the research artefact;
-for code vulnerabilities see the security note in the README.
+capability to exploit. This statement governs misuse of the research artefact.
+The harness holds no credentials and reads its API key from the environment;
+report any code or dependency concern through the repository's issue tracker,
+which `README.md` names as the contact channel.

@@ -1,16 +1,39 @@
 Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)
-Copyright (c) 2026 [authors anonymised for double-blind review]
+Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 
-This artefact is released under the MIT License (see LICENSE.md), with the
-single exception noted below. Authorship is withheld pending de-anonymisation.
+This artefact is dual-licensed: the software (harness, instrument, landing
+page) under the MIT License, and the written work and data (report, results,
+authored sidecars and synthetic model) under CC-BY-4.0. See LICENSE.md for the
+authoritative file list. Third-party material is noted below.
 
-Third-party component
----------------------
-substrate/apollo-model-excerpt.sysml is a verbatim excerpt of the Apollo 11
+It is the companion artefact to "Models as Governed Interfaces for AI-Native
+MBSE: Read-Side Adequacy and Write-Side Admissibility", published in the NIER
+track of MODELS 2026 (doi:10.1145/3822455.3838783).
+
+Third-party components
+----------------------
+substrate/apollo-model-excerpt.sysml and
+substrate/apollo-model-full-6e9c93f.sysml are reproduced from the Apollo 11
 SysML v2 reconstruction, copyright Airbus, licensed under the Mozilla Public
-License 2.0 (MPL-2.0). It is reproduced here under that licence with
-attribution, unmodified apart from an added provenance header comment.
+License 2.0 (MPL-2.0), under that licence with attribution. The first selects
+the elements bearing on S-IC first-stage propulsion; the second is every .sysml
+file in the source repository concatenated in sorted path order. Model content
+is unmodified: the excerpt adds a provenance header, and the full file adds a
+provenance header and per-file boundary markers. Airbus copyright and MPL-2.0
+notices are retained in both.
 
   Source:  https://github.com/airbus/apollo-11-sysml-v2
   Commit:  6e9c93fe7d80c5ca3534bb14b10ab374a643ef2d
   Licence: https://www.mozilla.org/en-US/MPL/2.0/
+
+docs/assets/apollo-11-liftoff-nasa-6900540.jpg is a NASA photograph of the
+Apollo 11 launch (16 July 1969), used on the landing page. NASA still images
+are generally not protected by copyright in the United States and may be used
+for educational or informational purposes with NASA acknowledged as the source.
+The image is reproduced unmodified apart from resampling, is used factually,
+and does not imply NASA endorsement of this work. It contains no identifiable
+persons.
+
+  Source:  https://images.nasa.gov/details/6900540
+  NASA ID: 6900540 (Marshall Space Flight Center, Saturn Apollo Program)
+  Terms:   https://www.nasa.gov/nasa-brand-center/images-and-media/

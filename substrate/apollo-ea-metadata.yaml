@@ -16,6 +16,10 @@ elements:
       method: transcription from historical flight-evaluation data
       review_stage: released
     evidence:
+      # ERRATUM (see RESULTS.md "Errata"): the report number below is wrong.
+      # NASA TM X-58058 is a 1971 speech-processing report; the Saturn V AS-506
+      # flight evaluation is MPR-SAT-FE-69-9. The quoted thrust content is
+      # correct. Left as executed for the same reason as EV-002 below.
       - id: EV-001
         source: "NASA TM X-58058, Saturn V AS-506 flight evaluation, S-IC propulsion data"
         reachable: true
@@ -53,15 +57,15 @@ elements:
       upstream: [CLR-R055.minLiftoffThrust]
       marker: UNRESOLVED          # quantitative sizing chain (thrust -> count) not recorded
     evidence:
+      # ERRATUM (see RESULTS.md "Errata"): the page reference below is wrong.
+      # The engine-count deliberation is at Bilstein pp.192-193, not p.156.
+      # The text is left as executed because it is the text the recorded run
+      # consumed and the scoring keys in probes.json score against; correcting
+      # it here would desynchronise the substrate from results/raw-results.json.
       - id: EV-002
-        source: "Bilstein, Stages to Saturn, NASA SP-4206, pp.192-193"
+        source: "Bilstein, Stages to Saturn, NASA SP-4206, p.156"
         reachable: true
-        content: >
-          The March 1961 Rosen committee report (delivered 20 March 1961)
-          recommended five, not four, engines in the first stage; the
-          five-engine configuration was formally adopted at the Management
-          Council Meeting of 21 December 1961. (Ch. 7, "The Lower Stages:
-          S-IC and S-II".)
+        content: "The March 1961 Rosen committee paper trail records the deliberation over four- versus five-engine first-stage configurations; the flown S-IC used five."
     open_items:
       - id: MARGIN
         marker: UNRESOLVED

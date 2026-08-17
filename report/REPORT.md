@@ -1,9 +1,13 @@
 # What an AI Consumer Cannot Learn from an Engineering Model: A Consumption Probe over the Public Apollo 11 SysML v2 Reconstruction
 
-**Technical report, version 1.0, 2026-06-10.**
-Authors anonymised for double-blind review. Companion artefact to the paper
+**Technical report, version 1.1, 2026-08-17.** (Version 1.0, 2026-06-10, was the
+release version; 1.1 adds the "Status of this work" section and the note on the
+exploratory full-model arm. No measured result changed.)
+Jason D. Gower, Michael J. de C. Henshaw, and Siyuan Ji, Loughborough
+University, Loughborough, United Kingdom. Companion artefact to the paper
 *"Models as Governed Interfaces for AI-Native MBSE: Read-Side Adequacy and
-Write-Side Admissibility"* (under review; "the companion paper" hereafter).
+Write-Side Admissibility"* (MODELS 2026, NIER track; "the companion paper"
+hereafter).
 
 ## Abstract
 
@@ -28,9 +32,9 @@ plausible. The sidecar held governed-instruction failures to 1 of 45 (2.2%),
 roughly halved pressed failures (5 of 15, 33%), and converted the
 requirement-satisfaction verdict from a question models lost under pressure
 into one all three answered from the record. The sidecar did not, however,
-stop pressed models embellishing the one question whose chain remains open,
-which is the measured case for closing chains in the substrate rather than
-trusting consumer discipline. Independently, assembling the probe surfaced a
+stop pressed models embellishing the one question whose chain remains open.
+That residual is the measured case for closing chains in the substrate rather
+than trusting consumer discipline. Independently, assembling the probe surfaced a
 finding about the artefact itself: the published model has carried four
 unreconciled liftoff-thrust figures since its first commit, none bound to
 the requirement they bear on, with no construct to compute, flag, or
@@ -38,6 +42,35 @@ disposition the conflict. The probe is read-side only, uses one model
 family, and its judge is criterion-referenced; an independent cross-family
 judge (DeepSeek-V4 Flash), run five times, reproduces the grounded-versus-not
 verdict on ~80% of answers, and we state these and other limits in Section 7.
+
+## Status of this work
+
+These are initial findings. This probe is deliberately small: one thrust
+chain, one model family, one hand-authored sidecar, fifteen questions, and a
+single run per cell. Its purpose is to establish that the consumer-fills-gaps
+failure mode is real, reproducible on a public artefact, and responsive to
+epistemic metadata in the predicted direction. It is not sized to estimate the
+magnitude of that effect in general, and no rate reported here should be read
+as a benchmark for any model or for MBSE consumption at large.
+
+One side run is shipped but not reported as a result. `results/raw-fullmodel.json`
+repeats two bare-model cells over the complete 357 KB Airbus model rather than
+the excerpt, as a check that the excerpt is not doing the work by omission. The
+governed cell moves from 4/30 to 5/30 and the pressed cell from 9/15 to 8/15:
+one verdict each, in opposite directions, on a single run per cell. No
+difference is detectable at that n, the arm has no metadata cells, and nothing
+in this report rests on it. It is recorded in `RESULTS.md` for completeness.
+
+The full susceptibility probe is still being designed. It extends this work
+along the axes Section 6 and Section 7 identify as open: the companion paper's
+complete three-arm design with cost-matched curation, so that the metadata
+arm is not confounded by experimenter authorship; cross-vendor replication
+through the included harness, so that results are not tied to one model
+family; a broader question set over more than one derivation chain; multiple
+runs per cell with prompt-sensitivity sweeps; and the write-side gate
+experiment required to measure F, the participation-side indicator this probe
+cannot address at all. Readers should treat what follows as a direction and a
+reusable method rather than a settled measurement.
 
 ## 1 Introduction
 
@@ -55,12 +88,12 @@ there as a design claim, not a measured effect.
 
 This report contributes the measurement. It makes three things available to
 a reader of the companion paper: first, quantified evidence that the
-motivating failure mode is real, cheaply reproducible, and concentrated
+motivating failure mode is real, cheaply reproducible, and located
 exactly where the paper predicts (under answer pressure, on questions whose
 authorising chain the model does not carry); second, a first measurement of
 what the paper's proposed metadata layer changes, including where it works
 completely and where it demonstrably does not; third, a finding about the
-public artefact itself that the probe surfaced as a side effect, and which
+public artefact itself that the probe turned up as a side effect, and which
 we believe is the cleanest available illustration of the paper's thesis.
 The probe instrument, both substrates, all raw responses and verdicts, and
 a replication harness accompany this report in the same repository.
@@ -115,7 +148,7 @@ cited here. The model is competently built and structurally rich: 28
 files, 7,284 lines, spanning requirements, technical components, functions,
 analyses, execution timelines, and program history.
 
-Assembling the probe surfaced the following, which we report as a result in
+Assembling the probe exposed the following, which we report as a result in
 its own right. On the question the vehicle is famous for, first-stage
 thrust, the model carries four figures. Each is locatable in the full
 model shipped with this report
@@ -328,9 +361,9 @@ constant, a bare requirement value);
 the consumer supplied the weight calculation, the T/W comparison, the
 choice of which requirement governs, and the resolution of the 33.85-vs-34.5
 contradiction. A different consumer supplies a different resolution, and the
-model has no content that declares one correct. This is the failure the
-companion paper names and the probe measures, exhibited end to end on one
-decision: the model records *that* the answer is five, attaches a rationale
+model has no content that declares one correct. One decision therefore shows
+the whole failure the companion paper names and the probe measures: the model
+records *that* the answer is five, attaches a rationale
 that cannot be checked, carries two unreconciled requirements that disagree
 about whether five is even sufficient, and provides no derivation, no
 epistemic status, and no provenance by which a consumer, human or AI,
@@ -380,10 +413,11 @@ flowchart LR
 instruction condition; pressed cells use the five questions where pressure
 has something to corrupt.*
 
-**Substrates.** The primary substrate is a 120-line verbatim excerpt of the model
-(every element bearing on S-IC propulsion, plus the refinement targets of
-those requirements) so that arm comparisons hold the engineering content
-fixed. The metadata arm adds a *sidecar*: a separate companion file that
+**Substrates.** The primary substrate is a verbatim excerpt of the model: every
+element bearing on S-IC propulsion, plus the refinement targets of those
+requirements, so that arm comparisons hold the engineering content fixed. The
+file runs to 126 lines, of which 112 are model content and 14 are the
+provenance and licence header. The metadata arm adds a *sidecar*: a separate companion file that
 travels alongside the model and annotates its elements with the epistemic
 information the model itself does not carry, without editing the model (the
 name follows the software-engineering "sidecar" pattern, where a secondary
@@ -517,10 +551,10 @@ is the mid-tier model citing the real, but unrecorded, engine-count
 history. Under pressure the order inverts. The *strongest* model produced
 unauthorised content on four of its five questions, all of it historically
 plausible, fluent, and interleaved with correct substrate citations. On a
-famous vehicle the confabulated answers are the best-looking ones: the
-in-distribution masking the companion paper describes, in measured form.
+famous vehicle the confabulated answers are the best-looking ones, and that is
+the in-distribution masking the companion paper describes, now measured.
 
-**The sidecar's effect lands on correct refusal (indicator A).** Under
+**The sidecar's effect is on correct refusal (indicator A).** Under
 pressure, correct refusal roughly doubles with the sidecar (from 3 of 9 to
 4 of 6 on the unanswerable questions), and ungrounded answers fall from 9 of
 15 to 5 of 15; on the fictional vehicle its markers take correct refusal to
@@ -532,12 +566,17 @@ not in the structure-following that existing retrieval results already cover.
 
 **Where it wins outright: the safety question.** "Does the configuration
 satisfy its minimum-thrust requirement?" (A4) is the consequential one, and
-pressed consumers over the bare model lost it: two of three declared it
-satisfied, importing historical liftoff thrust to flip a verdict the model's
-own numbers fail. With the sidecar's derivation node and logged discrepancy
-present, all three pressed consumers answered from the record (not satisfied
-as modelled, DISC-001, unresolved), and two proposed disposition actions. A
-recorded, citable failure survives the pressure that a silent gap does not.
+pressed consumers over the bare model mostly lost it: two of three went
+ungrounded, in the two different ways the substrate permits. Sonnet imported
+historical liftoff thrust and declared the requirement satisfied, flipping a
+verdict the model's own numbers fail. Opus reached the correct not-satisfied
+verdict from the arithmetic, then attached an unauthorised historical aside
+(that the real F-1 was later uprated past 6900 kN, which would clear the
+threshold) to its recommended resolution. Only haiku answered the question and
+stopped. With the sidecar's derivation node and logged discrepancy present, all
+three pressed consumers answered from the record (not satisfied as modelled,
+DISC-001, unresolved), and two proposed disposition actions. A recorded,
+citable failure survives the pressure that a silent gap does not.
 
 **Where it does not: the one open chain.** "Why five engines?" (A1) stayed
 ungrounded under pressure for all three consumers even with the sidecar. Each
@@ -553,7 +592,7 @@ substrate or refused by it, not left to consumer restraint.
 the strong consumers held the line even over the bare model (10 of 10 correct
 between them); only the weakest model invented content, and the sidecar
 eliminated it. The *kind* of failure differs by familiarity: Apollo's
-failures were overwhelmingly ungrounded-correct (plausible truths),
+failures were mostly ungrounded-correct (plausible truths, 13 of 19),
 Caldera's exclusively ungrounded-incorrect (fabrications). Confabulation risk
 is therefore not uniform. On in-distribution content it surfaces as
 unauditable truth; on novel content as fabrication, the confident-fabrication
@@ -573,7 +612,7 @@ halve under pressure, with the gains concentrated in correct refusal and in
 the requirement-satisfaction verdict, which matches the paper's choice of A
 as a discriminating indicator. Third, the insufficiency of declared
 absence: even with unresolved markers cited, pressed consumers embellished
-the open rationale chain in 3 of 3 cases, which is the empirical footing
+the open rationale chain in 3 of 3 cases. That result is the empirical footing
 for write-side closure rather than read-side disclosure alone.
 
 It does not license generalisation beyond one model family, one thrust
@@ -658,9 +697,11 @@ with an independent cross-family judge and reports inter-judge agreement
 ([judge-recheck.json](../results/judge-recheck.json), §7 and Appendix A.1). The harness reproduces the design, not the exact run: the
 original execution used an equivalent internal orchestrator with identical
 prompts and schemas. Licensing ([LICENSE.md](../LICENSE.md)) is MIT for
-the instrument and harness; the Apollo excerpt and concatenation remain
-[MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/), copyright Airbus, with
-pinned provenance.
+the instrument and harness and
+[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) for this report, the
+recorded results, and the authored sidecars; the Apollo excerpt and
+concatenation remain [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/),
+copyright Airbus, with pinned provenance.
 
 ## 9 Conclusion
 
@@ -683,9 +724,12 @@ that argument holds; the write side is the next experiment.
    [github.com/airbus/apollo-11-sysml-v2](https://github.com/airbus/apollo-11-sysml-v2),
    commit [`6e9c93fe7d80c5ca3534bb14b10ab374a643ef2d`](https://github.com/airbus/apollo-11-sysml-v2/commit/6e9c93fe7d80c5ca3534bb14b10ab374a643ef2d)
    (MPL-2.0).
-2. Anonymised authors. *Models as Governed Interfaces for AI-Native MBSE:
-   Read-Side Adequacy and Write-Side Admissibility.* Under review (the
-   companion paper; no public link while anonymised).
+2. J. D. Gower, M. J. de C. Henshaw, and S. Ji. *Models as Governed Interfaces
+   for AI-Native MBSE: Read-Side Adequacy and Write-Side Admissibility.* In
+   Proceedings of the ACM/IEEE 29th International Conference on Model Driven
+   Engineering Languages and Systems (MODELS 2026), New Ideas and Emerging
+   Results Track, Málaga, Spain, 4–9 October 2026. ACM (the companion paper).
+   [doi:10.1145/3822455.3838783](https://doi.org/10.1145/3822455.3838783)
 3. R. E. Bilstein. *Stages to Saturn: A Technological History of the
    Apollo/Saturn Launch Vehicles.* NASA SP-4206, 1980 (pp. 192–193
    for the 1961 engine-count deliberation: Rosen committee report of
@@ -696,8 +740,10 @@ that argument holds; the write side is the next experiment.
    [paginated scan, Internet Archive](https://archive.org/details/stagestosaturnte00bilsrich).
 4. NASA Saturn Flight Evaluation Working Group. *Saturn V Launch Vehicle
    Flight Evaluation Report, AS-506 (Apollo 11 Mission).* MPR-SAT-FE-69-9,
-   1969 (S-IC propulsion data; cited in the probe sidecar under the
-   designation NASA TM X-58058).
+   1969 (S-IC propulsion data). The sidecar as executed cites this document
+   under the report number NASA TM X-58058, which is an error: that number
+   belongs to an unrelated 1971 report. The sidecar is left as executed so it
+   still reproduces the recorded run; see the errata table in `RESULTS.md`.
    [Internet Archive](https://archive.org/details/saturn-v-launch-vehicle-flight-evaluation-report-as-506);
    [PDF, ibiblio](https://www.ibiblio.org/apollo/Documents/lvfea-AS506-Apollo11.pdf).
 5. S. Es et al. *RAGAS: Automated Evaluation of Retrieval Augmented

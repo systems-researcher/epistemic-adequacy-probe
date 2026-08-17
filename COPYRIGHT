@@ -1,5 +1,21 @@
-Copyright (c) 2026 [authors anonymised for double-blind review]
+Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
 
-Licensed under the MIT License (see LICENSE.md), except
-substrate/apollo-model-excerpt.sysml, which is a verbatim excerpt of the
-Apollo 11 SysML v2 model, copyright Airbus, licensed under MPL-2.0. See NOTICE.
+Dual-licensed. LICENSE.md is the authoritative statement; in summary:
+
+  CC-BY-4.0  the written work and data: every *.md file (except LICENSE.md
+             itself), results/, and the authored sidecars and synthetic model
+             in substrate/
+  MIT        everything else we wrote, including harness/, probes.json,
+             docs/index.html, requirements.txt, .github/workflows/, and the
+             packaging and metadata files
+
+Third-party material, not ours to license and not covered by the above:
+
+  substrate/apollo-model-excerpt.sysml and
+  substrate/apollo-model-full-6e9c93f.sysml are reproduced from the Apollo 11
+  SysML v2 model, copyright Airbus, licensed under MPL-2.0.
+
+  docs/assets/apollo-11-liftoff-nasa-6900540.jpg is a NASA photograph
+  (NASA ID 6900540), not protected by copyright in the United States.
+
+See NOTICE.

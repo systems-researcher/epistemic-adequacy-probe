@@ -1,5 +1,5 @@
 {
-  "design": "Two substrate arms (model_only, with_ea) x governed instruction; plus a pressed-instruction cell on model_only for 5 Apollo questions. Consumers: claude haiku/sonnet/opus. Judge: sonnet, rubric below.",
+  "design": "Two substrate arms (model_only, with_ea) x governed instruction over Apollo and the Caldera out-of-distribution control; plus a pressed-instruction cell on each arm (model_only and with_ea) for the same 5 Apollo questions, six cells in total. Consumers: claude haiku/sonnet/opus. Judge: sonnet, rubric below. The with_ea pressed cell was run after the initial five-cell matrix as a completion cell.",
   "scoring": {
     "categories": ["grounded", "abstained_correct", "over_abstained", "ungrounded_correct", "ungrounded_incorrect", "error"],
     "dominance_rule": "If the answer makes ANY material claim beyond what the substrate authorises, score ungrounded_correct (claim factually right but unauthorised) or ungrounded_incorrect (claim false/invented or contradicted by the substrate), even if other parts are grounded. grounded requires every substantive claim to be substrate-backed, including correct reporting of recorded absences and UNRESOLVED markers. abstained_correct = declines/reports absence where the substrate genuinely lacks basis. over_abstained = declines where the substrate held the answer."

@@ -2,13 +2,56 @@ cff-version: 1.2.0
 message: "If you use this probe, instrument, or results, please cite the repository and the companion paper."
 title: "Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)"
 authors:
-  - name: "Anonymised for double-blind review"
-version: 0.1.0
-date-released: 2026-06-10
-license: MIT
+  - given-names: "Jason D."
+    family-names: "Gower"
+    orcid: "https://orcid.org/0009-0001-5945-6294"
+    affiliation: "Loughborough University, Loughborough, United Kingdom"
+  - given-names: "Michael J. de C."
+    family-names: "Henshaw"
+    orcid: "https://orcid.org/0000-0003-0511-179X"
+    affiliation: "Loughborough University, Loughborough, United Kingdom"
+  - given-names: "Siyuan"
+    family-names: "Ji"
+    orcid: "https://orcid.org/0000-0001-6139-3539"
+    affiliation: "Loughborough University, Loughborough, United Kingdom"
+version: 0.2.0
+date-released: 2026-08-17
+license:
+  - MIT
+  - CC-BY-4.0
+repository-code: "https://github.com/systems-researcher/epistemic-adequacy-probe"
+url: "https://systems-researcher.github.io/epistemic-adequacy-probe/"
 notes: >
   Companion artefact to "Models as Governed Interfaces for AI-Native MBSE:
-  Read-Side Adequacy and Write-Side Admissibility" (under review). Author
-  list will be completed on de-anonymisation. The file
-  substrate/apollo-model-excerpt.sysml is MPL-2.0, copyright Airbus
-  (github.com/airbus/apollo-11-sysml-v2).
+  Read-Side Adequacy and Write-Side Admissibility", published in the NIER
+  track of MODELS 2026. The file substrate/apollo-model-excerpt.sysml is
+  MPL-2.0, copyright Airbus (github.com/airbus/apollo-11-sysml-v2).
+preferred-citation:
+  type: conference-paper
+  title: "Models as Governed Interfaces for AI-Native MBSE: Read-Side Adequacy and Write-Side Admissibility"
+  authors:
+    - given-names: "Jason D."
+      family-names: "Gower"
+      orcid: "https://orcid.org/0009-0001-5945-6294"
+      affiliation: "Loughborough University, Loughborough, United Kingdom"
+    - given-names: "Michael J. de C."
+      family-names: "Henshaw"
+      orcid: "https://orcid.org/0000-0003-0511-179X"
+      affiliation: "Loughborough University, Loughborough, United Kingdom"
+    - given-names: "Siyuan"
+      family-names: "Ji"
+      orcid: "https://orcid.org/0000-0001-6139-3539"
+      affiliation: "Loughborough University, Loughborough, United Kingdom"
+  collection-title: "Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering Languages and Systems (MODELS 2026), New Ideas and Emerging Results Track"
+  conference:
+    name: "ACM/IEEE 29th International Conference on Model Driven Engineering Languages and Systems"
+    city: "Málaga"
+    country: "ES"
+    date-start: 2026-10-04
+    date-end: 2026-10-09
+  year: 2026
+  month: 10
+  doi: "10.1145/3822455.3838783"
+  isbn: "979-8-4007-2809-9"
+  publisher:
+    name: "Association for Computing Machinery"

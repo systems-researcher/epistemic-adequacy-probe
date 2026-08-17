@@ -1,4 +1,10 @@
 // EXCERPT of the Airbus Apollo 11 SysML v2 model (MPL-2.0)
+//
+// Copyright (c) 2026 AIRBUS and its affiliates.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//
 // Source: https://github.com/airbus/apollo-11-sysml-v2 @ 6e9c93fe7d80c5ca3534bb14b10ab374a643ef2d
 // Extraction criteria: every element bearing on S-IC first-stage propulsion
 // (engine defs, stage defs, vehicle assembly, thrust requirements) plus the

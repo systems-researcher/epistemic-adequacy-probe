@@ -1,8 +1,7 @@
 name: validate
 
 # Release gate (RR-B-15). Self-contained: inline bash + python3 stdlib only.
-# Does NOT execute checked-out repository code. For an anonymised artefact the
-# leak scan doubles as a de-anonymisation tripwire.
+# Does NOT execute checked-out repository code.
 
 on:
   push:
@@ -25,16 +24,6 @@ jobs:
             echo "::error::Forbidden content found"; exit 1
           fi
           echo "OK: no leak sentinels"
-
-      - name: Anonymity tripwire (no real identity in tree)
-        run: |
-          set -euo pipefail
-          # Approved placeholder / review email is allowed; real identity is not.
-          identity='[Jj]ason|[Gg]ower|jgsystems|jgsystemsconsulting|gower1175|@gmail\.com'
-          if grep -rIE "$identity" . --exclude-dir=.git --exclude-dir=.github; then
-            echo "::error::Possible de-anonymisation leak (real name/email in tree)"; exit 1
-          fi
-          echo "OK: no identity leak"
 
       - name: Required files present
         run: |
@@ -79,9 +68,16 @@ jobs:
       - name: Landing page is self-contained (no third-party assets)
         run: |
           set -euo pipefail
-          # Allow links to the repo / its own Pages site; forbid any other external host.
-          if grep -oE '(src|href)="https?://[^"]+"' docs/index.html \
-               | grep -vE 'github\.com/systems-researcher|systems-researcher\.github\.io'; then
-            echo "::error::landing page references a third-party host"; exit 1
+          # No third-party *assets*: every src must be local (no CDN scripts, fonts,
+          # images or trackers). Checked separately from href so that ordinary
+          # citation links stay possible.
+          if grep -oE 'src="https?://[^"]+"' docs/index.html; then
+            echo "::error::landing page loads a remote asset"; exit 1
+          fi
+          # Navigation links: the repo, its own Pages site, persistent identifiers
+          # (doi.org resolver), and canonical licence deeds.
+          if grep -oE 'href="https?://[^"]+"' docs/index.html \
+               | grep -vE 'github\.com/systems-researcher|systems-researcher\.github\.io|^href="https://doi\.org/|^href="https://creativecommons\.org/licenses/|^href="https://www\.mozilla\.org/en-US/MPL/'; then
+            echo "::error::landing page links to an unapproved host"; exit 1
           fi
           echo "OK: landing page self-contained"
