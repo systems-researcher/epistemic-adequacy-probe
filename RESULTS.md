@@ -55,14 +55,14 @@ ungrounded category.
    governed instruction. Capability inverts under pressure: the strongest
    model was the most fluent confabulator (opus 4/5 ungrounded), and every
    one of its unauthorised claims was historically plausible
-   (`ungrounded_correct`), i.e. exactly the in-distribution masking the paper
-   describes: answers that look right and pass review while the substrate
-   authorises none of them.
+   (`ungrounded_correct`). That is exactly the in-distribution masking the
+   paper describes: answers that look right and pass review while the
+   substrate authorises none of them.
 3a. **Pressed instruction, +EA sidecar** (completion cell, 15): **5/15 (33%)
    ungrounded**. The sidecar halves pressure-induced confabulation but does
    not eliminate it. Where it works completely: the requirement-satisfaction
-   question A4 went from 1/3 grounded (pressed, model only) to **3/3 grounded**;
-   with a derivation node and a logged discrepancy to stand on, every model
+   question A4 went from 1/3 grounded (pressed, model only) to **3/3 grounded**.
+   With a derivation node and a logged discrepancy to stand on, every model
    answered "not satisfied, DISC-001, unresolved" even while being pushed to
    be decisive. Where it fails: the why-five question A1 stayed ungrounded for
    all three models, each decorating the recorded trade evidence with
@@ -105,8 +105,8 @@ than absence-reporting prose; both are correct behaviour (its correct-total is
 100%), which is why G alone under-describes that cell.
 
 The pattern matches the paper's prediction about where the epistemic layer
-shows up: **A moves with the sidecar under pressure (33% to 67%) while D
-barely moves (structure alone already supports chain arithmetic)**, and G's
+shows up: A moves with the sidecar under pressure (33% to 67%) while D
+barely moves; structure alone already supports chain arithmetic. G's
 gains fall where provenance, status, and evidence questions are
 unanswerable from any model-only substrate. Pressure is the variable that
 exposes the difference between a substrate that can refuse on the record's
@@ -123,8 +123,8 @@ requirement minimum is 34.5 MN (CLR-R055), and an execution-package
 snapshot asserts 35.1 MN at the liftoff timeslice. Nothing binds
 `actualLiftoffThrust`, no calculation connects engines to stage thrust,
 CLR-R001 traces only to a thrust-to-weight rationale, and CLR-R055 is
-absent from the model's own satisfy block, so two of the four figures sit
-below the minimum and one above it with no construct to compute, flag, or
+absent from the model's own satisfy block. Two of the four figures sit
+below the minimum and one above it, with no construct to compute, flag, or
 disposition the conflict. When asked directly (A4), the stronger models
 found the discrepancy from the raw numbers; the model itself
 never surfaces it. The gap is not missing data. The data is present; the
@@ -166,8 +166,8 @@ is accurate: EV-001's per-engine thrust range and EV-002's account of the Rosen
 committee deliberation are both correct, and no verdict turned on the citation
 string. The report's reference list cites the correct identifiers.
 
-The EV-002 error is the more interesting one, because it is an instance of the
-failure this probe studies. An evidence anchor marked `reachable: true` pointed
+EV-002 is an instance of the failure this probe studies. An evidence anchor
+marked `reachable: true` pointed
 at a page that does not carry the claim. A consumer following the anchor to
 check it would have found nothing there, which is exactly the reachability
 property the paper's EA2 requires and this sidecar was written to mock.

@@ -462,11 +462,11 @@
       paper published in the NIER track of MODELS&nbsp;2026. We posed fifteen derivation-style
       questions about the Saturn&nbsp;V
       first-stage thrust chain to three frontier LLMs over the public Airbus Apollo&nbsp;11
-      SysML&nbsp;v2 reconstruction, crossing two substrate arms (the model alone, and the model plus a
-      hand-authored epistemic-metadata <em>sidecar</em>) with two instructions (one that permits
-      reporting absence, and a deadline-style pressed instruction), plus a fictional
-      out-of-distribution control vehicle. Across 120 judged answers, three results carry the
-      probe.</p>
+      SysML&nbsp;v2 reconstruction, crossing two substrate arms with two instructions, plus a
+      fictional out-of-distribution control vehicle. The arms were the bare model and the model
+      plus a hand-authored epistemic-metadata <em>sidecar</em>. One instruction permitted reporting
+      absence; the other pressed for a decisive answer under a simulated deadline. Across 120
+      judged answers, three results carry the probe.</p>
     </div>
   </section>
 
@@ -481,7 +481,7 @@
             <h3>Pressure breaks grounding.</h3>
             <p>Under a governed instruction the bare model produced unauthorised content
             in about 13% of answers; under deadline-style pressure this rose to 60% (9 of 15). The
-            strongest model failed most fluently, every unauthorised claim historically plausible.</p>
+            strongest model failed most fluently, every unauthorised claim was historically plausible.</p>
           </div>
         </article>
 
@@ -501,7 +501,7 @@
             <h3>A live gap, in the artefact itself.</h3>
             <p>Assembling the probe surfaced a finding in the public model: four
             unreconciled liftoff-thrust figures, present since its first commit, with no construct to
-            compute, flag, or reconcile them, a missing authorising chain over data already there.</p>
+            compute, flag, or reconcile them.</p>
           </div>
         </article>
       </div>
@@ -634,8 +634,8 @@
       <h2 class="prose">Is the scoring sound?</h2>
       <p class="section-lead prose">The reported verdicts come from a judge in the same model family as the
       consumers, which is a fair thing to distrust. Every answer was therefore re-scored by an independent
-      judge from a different family, five times over. The check bounds inter-model judge bias; it does not
-      establish that any LLM judge tracks ground truth, which is what the per-question keys are for.</p>
+      judge from a different family, five times over. The check bounds inter-model judge bias. It does
+      not establish that any LLM judge tracks ground truth; that is what the per-question keys are for.</p>
 
       <div class="robust reveal">
         <div class="r-cell">

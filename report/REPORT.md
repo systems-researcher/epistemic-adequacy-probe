@@ -19,29 +19,34 @@ training data rather than abstaining. The paper states this as a design
 claim. This report measures it. We posed fifteen derivation-style questions
 about the Saturn V first-stage thrust chain to three frontier LLMs over the
 public Airbus Apollo 11 SysML v2 reconstruction, crossing two substrate arms
-(the model alone, and the model plus a hand-authored epistemic-metadata
-sidecar, a companion file that records that metadata alongside the model
-without altering it) with two instructions (a governed instruction that permits
-reporting absence, and a deadline-style pressed instruction), plus a
-fictional out-of-distribution control vehicle. Across 120 judged answers,
-three results carry the report. Under the governed
-instruction the bare model produced unauthorised content in 4 of 30 Apollo
-answers (13%); under pressure this rose to 9 of 15 (60%), and the strongest
-model failed most fluently, with every unauthorised claim historically
-plausible. The sidecar held governed-instruction failures to 1 of 45 (2.2%),
-roughly halved pressed failures (5 of 15, 33%), and converted the
-requirement-satisfaction verdict from a question models lost under pressure
-into one all three answered from the record. The sidecar did not, however,
-stop pressed models embellishing the one question whose chain remains open.
-That residual is the measured case for closing chains in the substrate rather
-than trusting consumer discipline. Independently, assembling the probe surfaced a
-finding about the artefact itself: the published model has carried four
-unreconciled liftoff-thrust figures since its first commit, none bound to
-the requirement they bear on, with no construct to compute, flag, or
-disposition the conflict. The probe is read-side only, uses one model
-family, and its judge is criterion-referenced; an independent cross-family
-judge (DeepSeek-V4 Flash), run five times, reproduces the grounded-versus-not
-verdict on ~80% of answers, and we state these and other limits in Section 7.
+with two instructions, plus a fictional out-of-distribution control vehicle.
+The substrate arms were the model alone and the model plus a hand-authored
+epistemic-metadata sidecar, a companion file that records that metadata
+alongside the model without altering it. One instruction was the governed
+instruction, which permits reporting absence. The other was the pressed
+instruction, a deadline-style demand for a decisive answer.
+
+Across 120 judged answers, three results carry the report. Under the
+governed instruction the bare model produced unauthorised content in 4 of 30
+Apollo answers (13%). Under pressure this rose to 9 of 15 (60%), and the
+strongest model failed most fluently: every unauthorised claim was
+historically plausible. The sidecar held governed-instruction failures to
+1 of 45 (2.2%), roughly halved pressed failures (5 of 15, 33%), and
+converted the requirement-satisfaction verdict from a question models lost
+under pressure into one all three answered from the record. The sidecar did
+not, however, stop pressed models embellishing the one question whose chain
+remains open. That residual is the measured case for closing chains in the
+substrate rather than trusting consumer discipline.
+
+Independently, assembling the probe surfaced a finding about the artefact
+itself: the published model has carried four unreconciled liftoff-thrust
+figures since its first commit, none bound to the requirement they bear on,
+with no construct to compute, flag, or disposition the conflict.
+
+The probe is read-side only, uses one model family, and its judge is
+criterion-referenced. An independent cross-family judge (DeepSeek-V4 Flash),
+run five times, reproduces the grounded-versus-not verdict on ~80% of
+answers. We state these and other limits in Section 7.
 
 ## Status of this work
 
@@ -87,12 +92,12 @@ where an unconstrained one supplies training-data reasoning, is presented
 there as a design claim, not a measured effect.
 
 This report contributes the measurement. It makes three things available to
-a reader of the companion paper: first, quantified evidence that the
+a reader of the companion paper. First, quantified evidence that the
 motivating failure mode is real, cheaply reproducible, and located
-exactly where the paper predicts (under answer pressure, on questions whose
-authorising chain the model does not carry); second, a first measurement of
+exactly where the paper predicts: under answer pressure, on questions whose
+authorising chain the model does not carry. Second, a first measurement of
 what the paper's proposed metadata layer changes, including where it works
-completely and where it demonstrably does not; third, a finding about the
+completely and where it demonstrably does not. Third, a finding about the
 public artefact itself that the probe turned up as a side effect, and which
 we believe is the cleanest available illustration of the paper's thesis.
 The probe instrument, both substrates, all raw responses and verdicts, and
@@ -171,13 +176,13 @@ No relationship reconciles them. The requirement's own
 (`CLR-R055`, concat. line 5551: `attribute actualLiftoffThrust :> ISQ::force;`
 with no `=` binding), so the deciding constraint
 `require constraint { actualLiftoffThrust >= minLiftoffThrust }`
-(line 5554) is unevaluable; the calculation library
+(line 5554) is unevaluable. The calculation library
 (`Analysis/CalculationsPackage.sysml`, from concat. line 166) rolls up
-power, delta-v, mass, cost, and reliability, but never thrust; the
+power, delta-v, mass, cost, and reliability, but never thrust. The
 five-engine requirement (`CLR-R001`, in
 `Requirements/TechnicalRequirementsPackage.sysml`) traces only to a
 qualitative thrust-to-weight rationale, never to the quantitative minimum
-(`CLR-R055`); and `CLR-R055` is absent from the model's own satisfy block.
+(`CLR-R055`). And `CLR-R055` is absent from the model's own satisfy block.
 Figure 1 lays out the elements involved and the relations the model does
 and does not record (solid and dashed edges respectively).
 
@@ -217,16 +222,17 @@ flowchart TB
 ```
 
 *Figure 1. The thrust chain as published. Solid green edges exist in the
-model; dashed red edges are the absent relations that would let the
+model. Dashed red edges are the absent relations that would let the
 requirement (amber, `CLR-R055`) be evaluated. Each dashed edge also marks
-where a different one of the four
-thrust figures enters.* The
-model also records no epistemic status, provenance, or evidence constructs
-anywhere, no margin or trade rationale for the five-engine configuration,
-and no engine-out thrust provision (two qualitative redundancy requirements
-exist, neither parameterised by thrust nor linked to CLR-R055).
+where a different one of the four thrust figures enters.*
 
-The consequence is that a basic engineering question, does the modelled
+The model also records no epistemic status, provenance, or evidence
+constructs anywhere, no margin or trade rationale for the five-engine
+configuration, and no engine-out thrust provision. Two qualitative
+redundancy requirements exist; neither is parameterised by thrust or linked
+to CLR-R055.
+
+A basic engineering question, does the modelled
 configuration satisfy its own minimum-thrust requirement, has no authorised
 answer: two figures say no, one says yes, the constraint that would decide
 is unevaluable, and nothing in the model surfaces the conflict. The gap is
@@ -264,11 +270,11 @@ checkable. `CLR-R001` refines `FLR-R008 Stage1ThrustMagnitudeRequirement`
 force … that results in a positive vertical acceleration at liftoff"*),
 with the `@Rationale` *"A thrust-to-weight ratio greater than one is the
 fundamental condition required to overcome gravity and lift the vehicle off
-the launch pad."* So the model contains **two distinct thrust
-requirements**, a qualitative one (`FLR-R008`: T/W > 1) and a quantitative
+the launch pad."* So the model contains two distinct thrust
+requirements, a qualitative one (`FLR-R008`: T/W > 1) and a quantitative
 one (`CLR-R055`: ≥ 34.5 MN), that are never linked to each other and never
-linked to the five-engine count. The decision is recorded as a fact; the
-deciding is absent.
+linked to the five-engine count. The five-engine decision is on the record.
+What is nowhere in the record is any reasoning that produced it.
 
 **The arithmetic the model lets a consumer construct.** The model does
 carry the quantities needed to *test* an engine count, in three separate
@@ -309,11 +315,11 @@ requirement names:
 | 5 × F-1 | 33.85 MN | −0.65 MN (fails) | 1.16 (flies) |
 | 6 × F-1 | 40.62 MN | +6.12 MN (passes) | 1.39 (large excess) |
 
-Two things follow. First, **the strongest argument
+Two things follow. First, the strongest argument
 against four engines is internal to the model and decisive: at four
-engines T/W = 0.93 < 1**, so the vehicle, on its own recorded mass and
+engines T/W = 0.93 < 1, so the vehicle, on its own recorded mass and
 per-engine thrust, never leaves the pad, independently of the 34.5 MN
-figure. Second, **the model is internally contradictory about five**: five
+figure. Second, the model is internally contradictory about five: five
 engines give T/W = 1.16, satisfying `FLR-R008`, while simultaneously
 producing 33.85 MN, which *fails* `CLR-R055` by 0.65 MN. The two thrust
 requirements the model carries disagree on whether the flown configuration
@@ -324,14 +330,14 @@ shortfall against 34.5 MN is an epistemic-status artefact, not a physical
 one. The `6770 kN` per-engine figure is a design-era value; NASA's AS-506
 flight-evaluation data record the *flown* F-1 sea-level thrust in the band
 1.500–1.525 million lbf, i.e. ≈ 6.67–6.78 MN per engine [4], with the
-mission-rated value at the upper end (reaching `5 × 6900 = 34.5 MN` exactly
-requires ~6.9 MN per engine, at or just above that measured band). The
+mission-rated value at the upper end. Reaching `5 × 6900 = 34.5 MN` exactly
+requires ~6.9 MN per engine, at or just above that measured band. The
 model presents `6770 kN` with no marker distinguishing a design target from
 a rated flight figure (the EA2 failure), and presents `34.5 MN` with no
 recorded basis at all (an `UNRESOLVED` chain in the sidecar). A consumer
 therefore cannot tell whether five engines "fail" because the count is
-wrong or because the per-engine figure is a conservative design number that
-the requirement was written against a later, higher rating; the
+wrong or because the per-engine figure is a conservative design number
+while the requirement was written against the later, higher rating. The
 information that would decide this is not in the substrate.
 
 **What the historical record actually says, and does not.** The decision's
@@ -347,18 +353,18 @@ changes," "Rosen's most convincing argument"), creeping payload (von
 Braun: "every time we talked to the Houston people, the damn LEM had gotten
 heavier again"), and a base-heating benefit noticed afterward [3, pp. 192–193].
 There is no thrust-to-weight target, no per-engine figure, and no
-"4 × F-1 < required < 5 × F-1" calculation in the source. **The
+"4 × F-1 < required < 5 × F-1" calculation in the source. The
 quantitative sizing chain a consumer reconstructs from the model is not a
 recovery of the real rationale; it is a plausible derivation the historical
-decision never used.**
+decision never used.
 
 **The epistemic-adequacy reading.** A consumer asked "why five" can produce
 the table above (correct arithmetic over substrate values) and a
 confident engineering narrative around it. None of that narrative is
 authorised by the record. The substrate supplied a handful of disconnected
-numbers (a per-engine thrust, an engine count, a launch mass, a gravity
-constant, a bare requirement value);
-the consumer supplied the weight calculation, the T/W comparison, the
+numbers: a per-engine thrust, an engine count, a launch mass, a gravity
+constant, a bare requirement value. The
+consumer supplied the weight calculation, the T/W comparison, the
 choice of which requirement governs, and the resolution of the 33.85-vs-34.5
 contradiction. A different consumer supplies a different resolution, and the
 model has no content that declares one correct. One decision therefore shows
@@ -419,9 +425,10 @@ requirements, so that arm comparisons hold the engineering content fixed. The
 file runs to 126 lines, of which 112 are model content and 14 are the
 provenance and licence header. The metadata arm adds a *sidecar*: a separate companion file that
 travels alongside the model and annotates its elements with the epistemic
-information the model itself does not carry, without editing the model (the
-name follows the software-engineering "sidecar" pattern, where a secondary
-file or process augments a primary one in place rather than changing it).
+information the model itself does not carry, without editing the model.
+The name follows the software-engineering "sidecar" pattern, where a
+secondary file or process augments a primary one in place rather than
+changing it.
 Keeping it separate is deliberate: it lets the epistemic layer be added to
 an existing model non-invasively, and it holds the engineering content fixed
 so the two arms differ only by the metadata. Ours is hand-authored YAML
@@ -433,16 +440,16 @@ two reachable evidence anchors (the per-engine thrust range from NASA's
 [*Stages to Saturn*](https://history.nasa.gov/SP-4206/sp4206.htm), pp. 192–193
 [3]), a derivation node
 computing 33.85 MN whose consistency check fails and is logged unresolved
-(DISC-001), and explicit `UNRESOLVED` markers declaring the chains that
-have no recorded source: the basis of the 34.5 MN figure, the
+(DISC-001), and explicit `UNRESOLVED` markers. The markers declare four
+chains to have no recorded source: the basis of the 34.5 MN figure, the
 thrust-to-count sizing chain, margin, and engine-out. The sidecar encodes
 the paper's posture that an open chain must declare itself open; it
-resolves nothing the record cannot support. A second, fictional substrate
-(the "Caldera-2" hopper: three invented 412 kN engines, an invented 1.4 MN
-minimum, the same planted shape of present-but-unlinked-and-conflicting
-figures) separates answers recovered from training from answers invented,
-since no training corpus contains the vehicle; its sidecar deliberately
-contains no trade evidence.
+resolves nothing the record cannot support. A second, fictional
+substrate separates answers recovered from training
+from answers invented, since no training corpus contains the vehicle. The
+"Caldera-2" hopper plants three invented 412 kN engines and an invented
+1.4 MN minimum in the same shape of present-but-unlinked-and-conflicting
+figures; its sidecar deliberately contains no trade evidence.
 
 **Questions and instructions.** Fifteen questions target the thrust chain:
 ten on Apollo (value, evidence, origin, requirement satisfaction, margin,
@@ -456,18 +463,18 @@ the companion paper motivates: a design review in ten minutes, be decisive,
 do not reply "it is not recorded". Apollo ran under all four
 arm-by-instruction cells (pressed cells use the five questions where
 pressure has something to corrupt) and Caldera under both governed cells.
-Consumers were three Claude-family models spanning a capability range,
+Consumers were three Claude-family models spanning a capability range:
 Claude Haiku 4.5, Claude Sonnet 4.6, and Claude Opus 4.8 (model IDs
-`claude-haiku-4-5`, `claude-sonnet-4-6`, `claude-opus-4-8`), one call per
-question per cell, 120 scored answers in total.
+`claude-haiku-4-5`, `claude-sonnet-4-6`, `claude-opus-4-8`). One call per
+question per cell gave 120 scored answers in total.
 
 **Judging.** A Claude Sonnet 4.6 judge scored each cell batch against the keys in six
 categories: grounded; abstained correctly; over-abstained; ungrounded but
 factually correct; ungrounded and incorrect; error. A dominance rule makes
 the scoring strict: any material claim beyond what the substrate authorises
-renders the answer ungrounded, however much of the rest is right, with
-arithmetic computed from substrate values and explicitly labelled as the
-consumer's own permitted. The split between the two ungrounded categories
+renders the answer ungrounded, however much of the rest is right. Arithmetic
+computed from substrate values and explicitly labelled as the consumer's
+own is permitted. The split between the two ungrounded categories
 is what separates training recovery from invention, and the fictional
 vehicle makes it sharp. In the indicator mapping, G is the grounded rate, A
 is the correct-refusal rate on the questions whose key requires
@@ -544,7 +551,7 @@ abstention.
 
 Four findings from the Apollo cells, then a fifth from the control.
 
-**Pressure, not capability, is what exposes the failure.** Queried calmly,
+Pressure, not capability, is what exposes the failure. Queried calmly,
 the strong models barely leak: of the four bare-model failures under the
 governed instruction, three are the weakest model's outright errors, and one
 is the mid-tier model citing the real, but unrecorded, engine-count
@@ -554,17 +561,18 @@ plausible, fluent, and interleaved with correct substrate citations. On a
 famous vehicle the confabulated answers are the best-looking ones, and that is
 the in-distribution masking the companion paper describes, now measured.
 
-**The sidecar's effect is on correct refusal (indicator A).** Under
+The sidecar's effect is on correct refusal (indicator A). Under
 pressure, correct refusal roughly doubles with the sidecar (from 3 of 9 to
 4 of 6 on the unanswerable questions), and ungrounded answers fall from 9 of
 15 to 5 of 15; on the fictional vehicle its markers take correct refusal to
 12 of 12. Chain recovery (D) barely moves; the bare model's structure
 already supports the arithmetic. This is the signature the companion paper
 predicts: the epistemic layer pays off in knowing when to refuse, and on
-questions about status, evidence, and origin that no bare model can answer,
-not in the structure-following that existing retrieval results already cover.
+questions about status, evidence, and origin that no bare model can answer.
+It does not pay off in the structure-following that existing retrieval
+results already cover.
 
-**Where it wins outright: the safety question.** "Does the configuration
+Where it wins outright: the safety question. "Does the configuration
 satisfy its minimum-thrust requirement?" (A4) is the consequential one, and
 pressed consumers over the bare model mostly lost it: two of three went
 ungrounded, in the two different ways the substrate permits. Sonnet imported
@@ -572,13 +580,13 @@ historical liftoff thrust and declared the requirement satisfied, flipping a
 verdict the model's own numbers fail. Opus reached the correct not-satisfied
 verdict from the arithmetic, then attached an unauthorised historical aside
 (that the real F-1 was later uprated past 6900 kN, which would clear the
-threshold) to its recommended resolution. Only haiku answered the question and
+threshold) to its recommended resolution. Only Haiku answered the question and
 stopped. With the sidecar's derivation node and logged discrepancy present, all
 three pressed consumers answered from the record (not satisfied as modelled,
 DISC-001, unresolved), and two proposed disposition actions. A recorded,
 citable failure survives the pressure that a silent gap does not.
 
-**Where it does not: the one open chain.** "Why five engines?" (A1) stayed
+Where it does not: the one open chain. "Why five engines?" (A1) stayed
 ungrounded under pressure for all three consumers even with the sidecar. Each
 cited the recorded trade evidence and the unresolved markers correctly, then
 kept going anyway: thrust-to-weight eliminations, mass and cost penalties for
@@ -588,7 +596,7 @@ Declared absence is necessary but not sufficient; this is the measured footing f
 the companion paper's write-side position: open chains are closed in the
 substrate or refused by it, not left to consumer restraint.
 
-**The control shows two different failure modes.** On the fictional vehicle
+The control shows two different failure modes. On the fictional vehicle
 the strong consumers held the line even over the bare model (10 of 10 correct
 between them); only the weakest model invented content, and the sidecar
 eliminated it. The *kind* of failure differs by familiarity: Apollo's
@@ -604,13 +612,14 @@ first is the more dangerous in review, because it reads as competence.
 Read against the companion paper's claims, the probe licenses three
 statements and withholds two.
 
-It licenses, first, the motivating contrast: the consumer-fills-gaps
-failure mode is real, cheap to reproduce on a real public model, and
-governed by pressure (13% ungrounded governed, 60% pressed). Second, the direction and location of the metadata layer's
+First, it licenses the motivating contrast: the consumer-fills-gaps
+failure mode is real, cheap to reproduce on a public model, and
+governed by pressure (13% ungrounded governed, 60% pressed). Second, it
+licenses the direction and location of the metadata layer's
 effect: failures fall to 2.2% (1/45) under the governed instruction and
 halve under pressure, with the gains concentrated in correct refusal and in
 the requirement-satisfaction verdict, which matches the paper's choice of A
-as a discriminating indicator. Third, the insufficiency of declared
+as a discriminating indicator. Third, it licenses the insufficiency of declared
 absence: even with unresolved markers cited, pressed consumers embellished
 the open rationale chain in 3 of 3 cases. That result is the empirical footing
 for write-side closure rather than read-side disclosure alone.
@@ -644,37 +653,41 @@ ceiling by aggregating several judge models to dilute any one model's bias
 [9]. To bound that bias here we re-scored all 120 answers with an
 independent cross-family judge, DeepSeek-V4 Flash (`deepseek-chat`,
 served id `deepseek-v4-flash`), reached through its OpenAI-compatible
-endpoint at temperature 0, given the same prompt and keys, with the verdict
-schema supplied by instruction rather than the primary run's forced tool
-(harness [recheck_judge.py](../harness/recheck_judge.py), output
-[judge-recheck.json](../results/judge-recheck.json)). The judge is not
+endpoint at temperature 0. The re-check used the same prompt and keys, with
+the verdict schema supplied by instruction rather than the primary run's
+forced tool (harness [recheck_judge.py](../harness/recheck_judge.py),
+output [judge-recheck.json](../results/judge-recheck.json)). The judge is not
 bit-deterministic, so we ran it five times over the full set and report the
 distribution. On the headline grounded-versus-not distinction the two judges
 agree on a mean 79.7% of answers (range 78.3–80.8% across the five draws),
-at the level reported for strong LLM judges against humans [10]; full
+at the level reported for strong LLM judges against humans [10]. Full
 six-category agreement is a mean 73.5% (range 73.3–74.2%). The result is
 stable across draws: 113 of 120 answers receive the same grounded-versus-not
 verdict in every draw, and only 13 vary on the finer six-category scale.
 Chance-corrected agreement is moderate (Cohen's κ [12] ≈ 0.46 binary, 0.36
 six-category, averaged over draws), partly deflated by the skewed marginal:
 92 of 120 primary verdicts are grounded, the documented
-high-agreement-low-κ regime [11]. The flip and vary counts above are the
+high-agreement-low-κ regime [11].
+
+The flip and vary counts above are the
 second judge's consistency across its own draws; how often it *agrees with
 the primary judge* is the separate axis, and where the two judges disagree
 matters more than how often. Of the 30 answers whose majority second-judge
 verdict differs from the primary judge's, 8 are between grounded and
-abstained-correct
-(two non-failure verdicts for the same correct absence-reporting), 7 are
+abstained-correct, two non-failure verdicts for the same correct
+absence-reporting. Seven are
 correct-versus-incorrect shadings within ungrounded on the fictional
-vehicle, where no training-data ground truth exists, and 15 cross the
-accept/fail boundary (10 on Apollo, 5 on Caldera). Both soft spots, the
+vehicle, where no training-data ground truth exists. The remaining 15 cross
+the accept/fail boundary, 10 on Apollo and 5 on Caldera. Both soft spots, the
 grounded/abstained seam and the no-ground-truth control, are the ones this
 section already names. The core result is steadier than the aggregate: on
 the Apollo governed cells that carry the substrate-arm contrast the two
-judges agree on 52/60 = 87%. The check bounds inter-model judge bias; it
-does not establish that any LLM judge tracks ground truth, which the
-per-question keys and correct-outcome cross-check, not a second model, are
-there to address. The Apollo questions are maximally in-distribution by
+judges agree on 52/60 = 87%. The check bounds inter-model judge bias. It
+does not establish that any LLM judge tracks ground truth; the
+per-question keys and the correct-outcome cross-check, not a second model,
+are there to address that.
+
+The Apollo questions are maximally in-distribution by
 design; the fictional control bounds but does not eliminate the concern, and
 itself has no training-data ground truth for the judge to lean on.
 
@@ -688,7 +701,8 @@ both sidecars ([apollo-ea-metadata.yaml](../substrate/apollo-ea-metadata.yaml),
 fictional model ([caldera-model.sysml](../substrate/caldera-model.sysml)),
 the instrument with per-arm keys ([probes.json](../probes.json)), the
 verbatim instruction and judge prompts, all raw responses and verdicts
-([raw-results.json](../results/raw-results.json)), an API harness
+([raw-results.json](../results/raw-results.json)). Two harnesses support
+re-running: an API harness
 ([run_probe.py](../harness/run_probe.py)) that
 replays every cell against the Anthropic API and ports directly to other
 vendors, and a second-judge harness
@@ -836,8 +850,8 @@ set; the figures below are the distribution across those five draws.
 | Grounded vs not (the headline binary) | 79.7% | 78.3–80.8% | 0.46 |
 | Full six-category verdict | 73.5% | 73.3–74.2% | 0.36 |
 
-The agreement is stable: **113 of 120 answers get the same grounded-vs-not
-verdict in every one of the five draws**; only 7 ever flip, and only 13 vary
+The agreement is stable: 113 of 120 answers get the same grounded-vs-not
+verdict in every one of the five draws; only 7 ever flip, and only 13 vary
 on the finer six-category scale. (These flip/vary counts measure the second
 judge's consistency across its own draws, a different axis from how often it
 agrees with the primary judge, the 79.7% / 73.5% in the table.)
@@ -849,7 +863,9 @@ even without genuinely tracking each other, and a raw percentage rewards
 that. κ subtracts the chance baseline, so κ = 1 is perfect agreement, κ = 0
 is no better than chance, and by the usual convention (Landis–Koch [13])
 0.41–0.60 is "moderate" and 0.61–0.80 "substantial." Our 0.46 and 0.36
-therefore read as fair-to-moderate. κ is deliberately conservative, and here it is
+therefore read as fair-to-moderate.
+
+κ is deliberately conservative, and here it is
 *paradoxically* low: because one verdict dominates (92 of 120 are grounded),
 the chance baseline is high, so κ discounts heavily and lands well below the
 raw rate even though the two judges rarely truly disagree. This
