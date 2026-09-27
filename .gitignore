@@ -6,3 +6,7 @@ results/replication*.json
 # Local QA artefacts (not shipped)
 .playwright-mcp/
 probe-*.png
+
+# Superpowers pipeline artifacts (not shipped)
+.superpowers/
+docs/superpowers/
