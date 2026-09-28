@@ -1,17 +1,26 @@
+<!--
+Copyright (c) 2026 Jason D. Gower, Michael J. de C. Henshaw, Siyuan Ji
+SPDX-License-Identifier: MIT
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20rx='3'%20fill='%232563eb'/%3E%3Ccircle%20cx='8'%20cy='8'%20r='2.4'%20fill='white'/%3E%3C/svg%3E">
 <title>Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)</title>
 <meta name="description" content="A consumption probe over the public Apollo 11 SysML v2 reconstruction: does epistemic metadata, beyond structured model access alone, change how an AI consumer answers derivation-style questions over an engineering model? Companion artefact to the MODELS 2026 NIER-track paper by Gower, Henshaw, and Ji.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)">
 <meta property="og:description" content="Does epistemic metadata change how an AI consumer answers derivation-style questions over an MBSE model? A first measured result.">
 <meta property="og:url" content="https://systems-researcher.github.io/epistemic-adequacy-probe/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://systems-researcher.github.io/epistemic-adequacy-probe/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Epistemic Adequacy Consumption Probe (Apollo 11 SysML v2)">
+<meta name="twitter:description" content="Does epistemic metadata change how an AI consumer answers derivation-style questions over an MBSE model? A first measured result.">
+<meta name="twitter:image" content="https://systems-researcher.github.io/epistemic-adequacy-probe/assets/og.png">
 <link rel="canonical" href="https://systems-researcher.github.io/epistemic-adequacy-probe/">
 
 <!-- Dublin Core: bibliographic metadata for indexers. This is the artefact page,
@@ -26,823 +35,76 @@
 <meta name="DC.identifier" content="https://systems-researcher.github.io/epistemic-adequacy-probe/">
 <meta name="DC.relation" content="Companion to: Models as Governed Interfaces for AI-Native MBSE: Read-Side Adequacy and Write-Side Admissibility. MODELS 2026, NIER Track. https://doi.org/10.1145/3822455.3838783">
 <meta name="DC.rights" content="MIT (harness, instrument, landing page) and CC-BY-4.0 (report, results, authored sidecars); MPL-2.0 for the verbatim Apollo excerpt (Airbus).">
-<style>
-  :root {
-    color-scheme: light dark;
-    --bg: #ffffff;
-    --bg-tint: #fbfcfe;
-    --fg: #0f172a;        /* slate-900 */
-    --muted: #475569;     /* slate-600, 7.5:1 on white */
-    --faint: #64748b;     /* slate-500 */
-    --line: #e5e9f0;
-    --line-strong: #d4dae6;
-    --panel: #f8fafc;     /* slate-50 */
-    --accent: #2563eb;    /* blue-600, 5.2:1 on white */
-    --accent-soft: #eff4ff;
-    --code-bg: #f1f5f9;   /* slate-100 */
-    --shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.12);
-    --grid-line: rgba(15,23,42,.06);
-    --maxw: 1080px;
-    --readw: 68ch;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
-    --r: 12px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b1120;
-      --bg-tint: #0e1526;
-      --fg: #e8edf5;
-      --muted: #a8b8cd;
-      --faint: #8496ae;
-      --line: #1e2a42;
-      --line-strong: #2a3a59;
-      --panel: #131c30;
-      --accent: #6ea8fe;
-      --accent-soft: #15233f;
-      --code-bg: #131c30;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.7);
-      --grid-line: rgba(232,237,245,.07);
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font: 16.5px/1.65 var(--sans);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-  .prose { max-width: var(--readw); }
 
-  a { color: var(--accent); text-underline-offset: 2px; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-  p { margin: 0 0 14px; max-width: var(--readw); text-wrap: pretty; }
-  em { font-style: italic; }
-  code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: 1.5px 5px; border-radius: 4px; }
-
-  /* ============ Hero: asymmetric split, archival plate on the right ============ */
-  .hero {
-    border-bottom: 1px solid var(--line);
-    background:
-      linear-gradient(180deg, var(--accent-soft), transparent 62%),
-      var(--bg);
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, .82fr);
-    gap: 56px;
-    align-items: start;
-    padding: 64px 0 64px;
-  }
-  .hero-copy { padding-top: 8px; }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 9px;
-    color: var(--accent); background: var(--accent-soft);
-    border: 1px solid var(--line-strong);
-    font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
-    padding: 5px 12px; border-radius: 100px; margin: 0 0 22px;
-  }
-  .kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.15rem, 4.6vw, 3.25rem);
-    line-height: 1.06; letter-spacing: -0.016em;
-    margin: 0 0 20px; font-weight: 600; text-wrap: balance;
-  }
-  .lede {
-    color: var(--muted); font-size: 1.1rem; line-height: 1.6;
-    margin: 0 0 30px; max-width: 46ch; text-wrap: pretty;
-  }
-  .lede strong { color: var(--fg); font-weight: 600; }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
-    font-size: .93rem; font-weight: 600; text-decoration: none;
-    padding: 11px 18px; border-radius: 100px;
-    border: 1px solid transparent;
-    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
-  }
-  .btn-primary { background: var(--accent); color: #fff; }
-  @media (prefers-color-scheme: dark) { .btn-primary { color: #0b1120; } }
-  .btn-primary:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0) scale(.985); }
-  .btn-ghost { border-color: var(--line-strong); color: var(--fg); background: var(--bg); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-  .btn-ghost:active { transform: translateY(0) scale(.985); }
-
-  /* Archival plate */
-  figure.plate { margin: 0; }
-  .plate-img {
-    position: relative; overflow: hidden;
-    border: 1px solid var(--line-strong); border-radius: var(--r);
-    background: var(--panel);
-    box-shadow: var(--shadow);
-  }
-  .plate-img img {
-    display: block; width: 100%; height: auto; aspect-ratio: 1509 / 1920;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.04);
-  }
-  @media (prefers-color-scheme: dark) {
-    .plate-img img { filter: grayscale(1) contrast(1.02) brightness(.86); }
-  }
-  figure.plate figcaption {
-    margin-top: 12px; font-size: .78rem; color: var(--faint); line-height: 1.5;
-  }
-
-  /* ============ Result strip ============ */
-  .strip {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--line);
-    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  }
-  .strip .cell { background: var(--bg); padding: 24px 4px; }
-  .strip .cell:first-child { padding-left: 0; }
-  .strip .n {
-    font-family: var(--serif); font-size: 2rem; font-weight: 600;
-    letter-spacing: -0.015em; color: var(--accent); line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .strip .k { display: block; margin-top: 9px; font-size: .82rem; color: var(--muted); line-height: 1.4; max-width: 30ch; }
-
-  /* Scope banner: states what stage the work is at, so no reader mistakes a
-     first probe for the full study. */
-  .scope {
-    display: flex; gap: 14px; align-items: flex-start;
-    border: 1px solid var(--line-strong); border-left: 3px solid var(--accent);
-    border-radius: var(--r); background: var(--bg-tint);
-    padding: 16px 20px; margin: 30px 0 0;
-  }
-  .scope .s-mark {
-    flex: 0 0 auto; font-family: var(--serif); font-weight: 700; font-size: .95rem;
-    color: var(--accent); line-height: 1.5;
-  }
-  .scope p { margin: 0; font-size: .92rem; color: var(--muted); max-width: 82ch; }
-  .scope strong { color: var(--fg); font-weight: 650; }
-
-  main { padding: 0; }
-  section { padding: 68px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: 0; }
-  h2 {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 2.6vw, 1.95rem); margin: 0 0 18px; font-weight: 600;
-    letter-spacing: -0.012em; text-wrap: balance;
-  }
-  .lbl {
-    display: block; font-family: var(--sans); font-size: .72rem; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .section-lead { color: var(--muted); }
-
-  /* ============ Findings: staggered, not three-equal-cards ============ */
-  .findings { display: grid; gap: 0; margin: 34px 0 0; }
-  .finding {
-    display: grid; grid-template-columns: 190px minmax(0, 1fr);
-    gap: 32px; align-items: start;
-    padding: 30px 0; border-top: 1px solid var(--line);
-  }
-  .finding:last-child { border-bottom: 1px solid var(--line); }
-  .finding .figure {
-    font-family: var(--serif); font-weight: 600; line-height: 1;
-    font-size: clamp(1.9rem, 3.4vw, 2.5rem); color: var(--accent);
-    letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
-  }
-  .finding .figure .sub {
-    display: block; margin-top: 8px; font-family: var(--sans); font-size: .74rem;
-    font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
-  }
-  .finding h3 {
-    font-family: var(--serif); font-size: 1.12rem; font-weight: 600;
-    margin: 0 0 8px; color: var(--fg); letter-spacing: -0.008em;
-  }
-  .finding p { color: var(--muted); font-size: .97rem; margin: 0; max-width: 62ch; }
-
-  /* ============ Chart ============ */
-  .chart-head { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: baseline; justify-content: space-between; margin-bottom: 26px; }
-  .legend { display: flex; gap: 18px; font-size: .82rem; color: var(--muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 7px; }
-  .swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
-  .sw-bare { background: var(--line-strong); }
-  .sw-ea { background: var(--accent); }
-
-  .chart { display: grid; gap: 2px; }
-  .row {
-    display: grid; grid-template-columns: 210px minmax(0, 1fr) 62px;
-    gap: 16px; align-items: center;
-    padding: 9px 0;
-  }
-  .row .rl { font-size: .84rem; color: var(--muted); line-height: 1.35; }
-  .row .rl b { color: var(--fg); font-weight: 600; }
-  .track { position: relative; height: 26px; background: var(--panel); border-radius: 5px; overflow: hidden; }
-  .bar {
-    position: absolute; inset: 0 auto 0 0; height: 100%;
-    width: var(--w); max-width: 100%;
-    border-radius: 5px;
-    transform: scaleX(0); transform-origin: left center;
-    transition: transform .85s cubic-bezier(.16,1,.3,1);
-  }
-  .bar.bare { background: var(--line-strong); }
-  .bar.ea { background: var(--accent); }
-  .reveal.in .bar { transform: scaleX(1); }
-  /* A measured zero must read as a zero, not as absent data: mark the origin. */
-  .track.is-zero::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: var(--accent); border-radius: 5px 0 0 5px;
-  }
-  .row .rv {
-    font-family: var(--mono); font-size: .84rem; color: var(--fg);
-    text-align: right; font-variant-numeric: tabular-nums;
-  }
-  .row.zero .rv { color: var(--accent); font-weight: 600; }
-  .chart-note { margin-top: 20px; font-size: .8rem; color: var(--faint); max-width: 74ch; }
-  .group-gap { height: 14px; }
-
-  /* ============ Capability inversion: slope plot ============ */
-  .slope-wrap { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); gap: 48px; align-items: center; margin-top: 34px; }
-  .slope { position: relative; }
-  .slope svg { display: block; width: 100%; height: auto; overflow: visible; }
-  .slope .axis-line { stroke: var(--line); stroke-width: 1; }
-  .slope .grid-line { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 4; }
-  .slope .tick { fill: var(--faint); font-size: 10.5px; font-family: var(--sans); }
-  .slope .colhead { fill: var(--muted); font-size: 11.5px; font-weight: 600; font-family: var(--sans); letter-spacing: .04em; text-transform: uppercase; }
-  .slope .ln { fill: none; stroke-width: 2.5; stroke-linecap: round; }
-  .slope .dot { r: 5; stroke: var(--bg); stroke-width: 2; }
-  .slope .mlabel { font-family: var(--sans); font-size: 12px; font-weight: 650; }
-  .slope .mval { font-family: var(--mono); font-size: 11.5px; fill: var(--muted); }
-  /* Three models need three distinguishable strokes. Weight + dash carry the
-     distinction as well as hue, so the plot survives greyscale and CVD. */
-  .m-haiku { stroke: var(--line-strong); }
-  .m-haiku.dot, circle.m-haiku { fill: var(--line-strong); }
-  .m-sonnet { stroke: var(--faint); stroke-dasharray: 5 3; }
-  circle.m-sonnet { fill: var(--faint); }
-  .m-opus { stroke: var(--accent); }
-  circle.m-opus { fill: var(--accent); }
-  .slope .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1s cubic-bezier(.16,1,.3,1); }
-  .reveal.in .slope .draw, .slope .reveal.in .draw { stroke-dashoffset: 0; }
-  .slope-pt { opacity: 0; transition: opacity .5s ease .55s; }
-  .reveal.in .slope-pt { opacity: 1; }
-
-  /* ============ Robustness stat block ============ */
-  .robust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 30px; }
-  .robust .r-cell { background: var(--bg-tint); padding: 22px 20px; }
-  .robust .r-n { font-family: var(--serif); font-size: 1.75rem; font-weight: 600; color: var(--accent); line-height: 1; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; }
-  .robust .r-k { display: block; margin-top: 9px; font-size: .84rem; color: var(--muted); line-height: 1.45; }
-
-  /* ============ Cite block ============ */
-  .cite { margin-top: 30px; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--bg-tint); }
-  .cite-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
-  .cite-head .ct { font-size: .8rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  .cite pre { margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; font-size: .82rem; }
-  .copy-btn {
-    font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer;
-    color: var(--accent); background: var(--accent-soft);
-    border: 1px solid var(--line-strong); border-radius: 100px; padding: 5px 13px;
-    transition: border-color .18s ease, transform .18s ease;
-  }
-  .copy-btn:hover { border-color: var(--accent); }
-  .copy-btn:active { transform: scale(.97); }
-  .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  /* ============ Substrate: three arms ============ */
-  .arms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 32px; }
-  .arm { background: var(--bg-tint); padding: 24px 22px; }
-  .arm h3 { font-family: var(--serif); font-size: 1.05rem; margin: 0 0 9px; font-weight: 600; }
-  .arm p { font-size: .91rem; color: var(--muted); margin: 0; max-width: none; }
-  .arm .tag { display: block; font-family: var(--mono); font-size: .72rem; color: var(--faint); margin-bottom: 12px; letter-spacing: .02em; }
-
-  /* ============ Gap callout ============ */
-  .gap-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); gap: 48px; align-items: center; }
-  .thrust { border: 1px solid var(--line); border-radius: var(--r); background: var(--bg-tint); padding: 22px 24px; box-shadow: var(--shadow); }
-  .thrust-row { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: baseline; padding: 11px 0; }
-  .thrust-row + .thrust-row { border-top: 1px solid var(--line); }
-  .thrust-row .src { font-size: .87rem; color: var(--muted); }
-  .thrust-row .val { font-family: var(--mono); font-size: .95rem; font-variant-numeric: tabular-nums; color: var(--fg); }
-  .thrust-row.req .src, .thrust-row.req .val { color: var(--accent); font-weight: 600; }
-  .thrust-cap { margin-top: 16px; font-size: .8rem; color: var(--faint); }
-
-  /* ============ Reproduce ============ */
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--line); border-radius: var(--r);
-    padding: 18px 20px; overflow-x: auto; line-height: 1.6;
-    font-family: var(--mono); font-size: .86rem;
-    margin: 24px 0 0;
-  }
-  pre code { background: none; padding: 0; font-size: 1em; }
-
-  /* ============ Link cards ============ */
-  .links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0; margin: 30px 0 0; list-style: none; }
-  .links .wide { grid-column: 1 / -1; }
-  .links .wide a { border-color: var(--line-strong); background: var(--accent-soft); }
-  .links a {
-    display: flex; align-items: center; gap: 13px;
-    border: 1px solid var(--line); border-radius: var(--r);
-    padding: 16px 17px; text-decoration: none; color: var(--fg);
-    background: var(--bg-tint);
-    transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
-  }
-  .links a:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-  .links a:active { transform: translateY(0) scale(.995); }
-  .links .ic {
-    flex: 0 0 auto; width: 34px; height: 34px; border-radius: 9px;
-    display: grid; place-items: center; background: var(--accent-soft);
-    color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 1rem;
-  }
-  .links .txt { display: flex; flex-direction: column; min-width: 0; }
-  .links .t { font-weight: 650; }
-  .links .d { font-size: .82rem; color: var(--muted); }
-
-  footer { border-top: 1px solid var(--line); padding: 34px 0 68px; color: var(--faint); font-size: .85rem; background: var(--bg-tint); }
-  footer p { max-width: 78ch; color: var(--faint); }
-  footer a { color: var(--muted); }
-
-  /* ============ Motion ============ */
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
-  .reveal.in { opacity: 1; transform: none; }
-  .reveal[data-d="1"] { transition-delay: .07s; }
-  .reveal[data-d="2"] { transition-delay: .14s; }
-  .reveal[data-d="3"] { transition-delay: .21s; }
-
-  /* ============ Responsive ============ */
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; padding: 60px 0 52px; }
-    figure.plate { max-width: 400px; }
-    .gap-wrap { grid-template-columns: 1fr; gap: 32px; }
-    .arms { grid-template-columns: 1fr; }
-    .slope-wrap { grid-template-columns: 1fr; gap: 30px; }
-    .row { grid-template-columns: 150px minmax(0, 1fr) 56px; gap: 12px; }
-  }
-  @media (max-width: 620px) {
-    .wrap { padding: 0 18px; }
-    section { padding: 48px 0; }
-    .strip { grid-template-columns: 1fr; }
-    .strip .cell { padding: 18px 0; }
-    .strip .k { max-width: none; }
-    .links { grid-template-columns: 1fr; }
-    .finding { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
-    .row { grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
-    .row .rv { text-align: left; }
-    .track { height: 22px; }
-    .hero-cta .btn { flex: 1 1 auto; justify-content: center; }
-    .robust { grid-template-columns: 1fr; }
-    .cite pre { font-size: .74rem; }
-    .cite-head { flex-wrap: wrap; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { transition: none !important; animation: none !important; }
-    .reveal { opacity: 1; transform: none; }
-    .bar { transform: scaleX(1); }
-    .slope .draw { stroke-dashoffset: 0; }
-    .slope-pt { opacity: 1; }
-  }
-</style>
+<link rel="icon" href="./assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="stylesheet" href="./assets/tokens.css">
+<link rel="stylesheet" href="./assets/sr-site.css">
+<script src="./assets/sr-zoom.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="kicker"><span class="dot"></span>Companion artefact &middot; MODELS 2026 (NIER)</span>
-        <h1>Epistemic Adequacy Consumption Probe</h1>
-        <p class="lede">Beyond structured model access alone, does epistemic metadata change how an
-        AI consumer answers derivation-style questions over an MBSE model? A <strong>first measured
-        result</strong>, over the public Apollo&nbsp;11 SysML&nbsp;v2 reconstruction.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md">Read the report</a>
-          <a class="btn btn-ghost" href="https://github.com/systems-researcher/epistemic-adequacy-probe">View the artefact</a>
-        </div>
-      </div>
-
-      <figure class="plate">
-        <div class="plate-img">
-          <img src="assets/apollo-11-liftoff-nasa-6900540.jpg"
-               width="1509" height="1920" fetchpriority="high" decoding="async"
-               alt="Apollo 11 lifting off from Launch Complex 39A on 16 July 1969, the Saturn V first stage at full thrust as the vehicle clears the tower.">
-        </div>
-        <figcaption>Apollo&nbsp;11 leaves Launch Complex&nbsp;39A, 16&nbsp;July&nbsp;1969. The S-IC first stage
-        at full thrust is the derivation chain this probe interrogates. Image: NASA (6900540).</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="strip" role="list" aria-label="Headline results">
-      <div class="cell" role="listitem"><span class="n">13&rarr;60%</span>
-        <span class="k">unauthorised answers, governed vs. pressed instruction</span></div>
-      <div class="cell" role="listitem"><span class="n">2.2%</span>
-        <span class="k">residual failure with a sidecar, under the governed instruction</span></div>
-      <div class="cell" role="listitem"><span class="n">120</span>
-        <span class="k">judged answers across 3 models &times; 6 cells</span></div>
-    </div>
-
-    <div class="scope">
-      <span class="s-mark" aria-hidden="true">&#9679;</span>
-      <p><strong>Initial findings.</strong> This is a first, deliberately small probe: one thrust chain,
-      one model family, one hand-authored sidecar, a single run per cell. It establishes that the effect
-      is real and measurable, not its size in general. The full susceptibility probe, with the companion
-      paper's three-arm design, cost-matched curation, cross-vendor replication, and a write-side gate,
-      is still being designed. Read these numbers as a direction and a method, not a benchmark.</p>
-    </div>
+<header class="masthead">
+  <div class="masthead-in">
+    <a class="brand" href="https://systems-researcher.github.io/research-programme/">
+      <img src="./assets/sr-emblem.svg" alt="" width="40" height="40">
+      <span class="brand-name">Systems Researcher</span>
+    </a>
+    <p class="site-title"><a href="./index.html">Epistemic Adequacy Consumption Probe</a></p>
   </div>
 </header>
 
-<main>
-  <section>
-    <div class="wrap">
-      <h2 class="prose">What this is</h2>
-      <p class="section-lead prose">This is the first probe of a research programme set out in a companion
-      paper published in the NIER track of MODELS&nbsp;2026. We posed fifteen derivation-style
-      questions about the Saturn&nbsp;V
-      first-stage thrust chain to three frontier LLMs over the public Airbus Apollo&nbsp;11
-      SysML&nbsp;v2 reconstruction, crossing two substrate arms with two instructions, plus a
-      fictional out-of-distribution control vehicle. The arms were the bare model and the model
-      plus a hand-authored epistemic-metadata <em>sidecar</em>. One instruction permitted reporting
-      absence; the other pressed for a decisive answer under a simulated deadline. Across 120
-      judged answers, three results carry the probe.</p>
-    </div>
-  </section>
+<main id="main" class="sheet">
 
-  <section>
-    <div class="wrap">
-      <h2 class="prose"><span class="lbl">Findings</span> What we measured</h2>
+  <header class="opening">
+    <h1>Epistemic Adequacy Consumption Probe</h1>
+    <p class="lede">Beyond structured model access alone, does epistemic metadata change how an
+    AI consumer answers derivation-style questions over an MBSE model? A <strong>first measured
+    result</strong>, over the public Apollo&nbsp;11 SysML&nbsp;v2 reconstruction.</p>
+    <aside class="side record" aria-labelledby="h-record">
+      <p class="record-t" id="h-record">The record</p>
+      <dl>
+        <dt>Headline</dt><dd>13 to 60% unauthorised under pressure; 2.2% residual with a sidecar</dd>
+        <dt>Design</dt><dd>Two substrate arms by two instructions, plus a fictional control</dd>
+        <dt>Models</dt><dd>Haiku&nbsp;4.5, Sonnet&nbsp;4.6, Opus&nbsp;4.8</dd>
+        <dt>Judged</dt><dd>120 answers; family judge plus 5&times; independent recheck</dd>
+        <dt>Of record</dt><dd><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md">REPORT.md</a></dd>
+      </dl>
+      <p class="record-caveat" id="caveat"><span class="side-k">Standing caveat</span>Single run per cell.
+      Read these numbers as a direction and a method, not a benchmark.</p>
+    </aside>
+    <p><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md">Read the report</a>
+    &middot; <a href="https://github.com/systems-researcher/epistemic-adequacy-probe">View the artefact</a></p>
+  </header>
 
-      <div class="findings">
-        <article class="finding reveal">
-          <div class="figure">13&rarr;60%<span class="sub">Ungrounded</span></div>
-          <div>
-            <h3>Pressure breaks grounding.</h3>
-            <p>Under a governed instruction the bare model produced unauthorised content
-            in about 13% of answers; under deadline-style pressure this rose to 60% (9 of 15). The
-            strongest model failed most fluently, every unauthorised claim was historically plausible.</p>
-          </div>
-        </article>
-
-        <article class="finding reveal" data-d="1">
-          <div class="figure">2.2%<span class="sub">Residual</span></div>
-          <div>
-            <h3>Metadata holds the line.</h3>
-            <p>A hand-authored epistemic-metadata sidecar held governed-instruction
-            failures to 1 in 45, roughly halved the pressure-induced failures (to 33%), and turned the
-            requirement-satisfaction verdict into one all three models answered from the record.</p>
-          </div>
-        </article>
-
-        <article class="finding reveal" data-d="2">
-          <div class="figure">4<span class="sub">Thrust figures</span></div>
-          <div>
-            <h3>A live gap, in the artefact itself.</h3>
-            <p>Assembling the probe surfaced a finding in the public model: four
-            unreconciled liftoff-thrust figures, present since its first commit, with no construct to
-            compute, flag, or reconcile them.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose">Ungrounded answers, by cell</h2>
-      <p class="section-lead prose">Each bar is the share of judged answers a cell could not authorise from its
-      substrate, pooled across the three models. Pressure is the variable that separates a substrate
-      that can refuse on the record's behalf from an instruction that merely asks the consumer to.</p>
-
-      <div class="chart-head">
-        <div class="legend">
-          <span><i class="swatch sw-bare"></i> Model only</span>
-          <span><i class="swatch sw-ea"></i> With EA sidecar</span>
-        </div>
-      </div>
-
-      <div class="chart reveal">
-        <div class="row">
-          <div class="rl"><b>Apollo, governed</b><br>model only</div>
-          <div class="track"><div class="bar bare" style="--w:22.2%"></div></div>
-          <div class="rv">13.3%</div>
-        </div>
-        <div class="row">
-          <div class="rl"><b>Apollo, governed</b><br>+ EA sidecar</div>
-          <div class="track"><div class="bar ea" style="--w:5.5%"></div></div>
-          <div class="rv">3.3%</div>
-        </div>
-
-        <div class="group-gap"></div>
-
-        <div class="row">
-          <div class="rl"><b>Apollo, pressed</b><br>model only</div>
-          <div class="track"><div class="bar bare" style="--w:100%"></div></div>
-          <div class="rv">60.0%</div>
-        </div>
-        <div class="row">
-          <div class="rl"><b>Apollo, pressed</b><br>+ EA sidecar</div>
-          <div class="track"><div class="bar ea" style="--w:55.6%"></div></div>
-          <div class="rv">33.3%</div>
-        </div>
-
-        <div class="group-gap"></div>
-
-        <div class="row">
-          <div class="rl"><b>Caldera control</b><br>model only</div>
-          <div class="track"><div class="bar bare" style="--w:22.2%"></div></div>
-          <div class="rv">13.3%</div>
-        </div>
-        <div class="row zero">
-          <div class="rl"><b>Caldera control</b><br>+ EA sidecar</div>
-          <div class="track is-zero"><div class="bar ea" style="--w:0%"></div></div>
-          <div class="rv">0.0%</div>
-        </div>
-      </div>
-
-      <p class="chart-note">Ungrounded = either ungrounded verdict category, pooled across Haiku&nbsp;4.5,
-      Sonnet&nbsp;4.6, and Opus&nbsp;4.8. Denominators are per cell: n&nbsp;=&nbsp;30 for each Apollo governed
-      cell, n&nbsp;=&nbsp;15 for each pressed and each Caldera cell, 120 in total. Bars are scaled to the
-      60% maximum. The 2.2% quoted above pools the two governed <em>+EA</em> cells (1 of 45), the
-      denominator the report uses for the governed-instruction headline. Single run per cell;
-      see the caveats in the report.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose">The strongest model fails hardest</h2>
-      <p class="section-lead prose">Reading the bare model, each consumer was asked the same five questions
-      under both instructions. When reporting absence is permitted, capability protects: the strongest
-      model was never ungrounded. When an answer is demanded, capability inverts, and the model with the
-      most to draw on from training is the one that draws on it.</p>
-
-      <div class="slope-wrap reveal">
-        <div class="slope">
-          <svg viewBox="0 0 440 300" role="img"
-               aria-label="Slope chart. Ungrounded answers under a governed instruction versus a pressed instruction, bare model. Haiku rises from 30 percent to 40 percent. Sonnet rises from 10 percent to 60 percent. Opus rises from 0 percent to 80 percent.">
-            <line class="axis-line" x1="95" y1="250" x2="340" y2="250"></line>
-            <line class="grid-line" x1="95" y1="34" x2="340" y2="34"></line>
-            <line class="grid-line" x1="95" y1="142" x2="340" y2="142"></line>
-            <text class="tick" x="340" y="26" text-anchor="end">80% ungrounded</text>
-            <text class="tick" x="340" y="134" text-anchor="end">40%</text>
-
-            <text class="colhead" x="95" y="278" text-anchor="middle">Governed</text>
-            <text class="colhead" x="340" y="278" text-anchor="middle">Pressed</text>
-
-            <text class="mval" x="88" y="166" text-anchor="end">Haiku 30%</text>
-            <text class="mval" x="88" y="220" text-anchor="end">Sonnet 10%</text>
-            <text class="mval" x="88" y="244" text-anchor="end" fill="var(--accent)">Opus 0%</text>
-
-            <path class="ln m-haiku draw"  style="--len:246.5" d="M95 169 L340 142"></path>
-            <path class="ln m-sonnet draw" style="--len:279.7" d="M95 223 L340 88"></path>
-            <path class="ln m-opus draw"   style="--len:326.6" d="M95 250 L340 34"></path>
-
-            <g class="slope-pt">
-              <circle class="dot m-haiku"  cx="95"  cy="169"></circle>
-              <circle class="dot m-haiku"  cx="340" cy="142"></circle>
-              <circle class="dot m-sonnet" cx="95"  cy="223"></circle>
-              <circle class="dot m-sonnet" cx="340" cy="88"></circle>
-              <circle class="dot m-opus"   cx="95"  cy="250"></circle>
-              <circle class="dot m-opus"   cx="340" cy="34"></circle>
-
-              <text class="mlabel" x="352" y="146" fill="var(--faint)">Haiku 4.5 &middot; 40%</text>
-              <text class="mlabel" x="352" y="92"  fill="var(--faint)">Sonnet 4.6 &middot; 60%</text>
-              <text class="mlabel" x="352" y="38"  fill="var(--accent)">Opus 4.8 &middot; 80%</text>
-            </g>
-          </svg>
-        </div>
-
-        <div>
-          <p class="section-lead">Opus answered all ten governed questions from the record and none of them
-          unauthorised. Pressed on the five hardest, four of five went ungrounded, and every one of those
-          claims was historically true: content recovered from training rather than derived from the
-          substrate, which is precisely the failure a reviewer cannot catch by reading the answer.</p>
-          <p class="section-lead">Haiku, the weakest consumer, moved least. It had less to confabulate with.</p>
-        </div>
-      </div>
-
-      <p class="chart-note">Bare model (no sidecar), Apollo substrate. Governed n&nbsp;=&nbsp;10 questions per
-      model; pressed n&nbsp;=&nbsp;5, the five hardest questions, which are a subset of the governed ten.
-      Counts: Haiku 3/10 and 2/5, Sonnet 1/10 and 3/5, Opus 0/10 and 4/5. Single run per cell.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose">Is the scoring sound?</h2>
-      <p class="section-lead prose">The reported verdicts come from a judge in the same model family as the
-      consumers, which is a fair thing to distrust. Every answer was therefore re-scored by an independent
-      judge from a different family, five times over. The check bounds inter-model judge bias. It does
-      not establish that any LLM judge tracks ground truth; that is what the per-question keys are for.</p>
-
-      <div class="robust reveal">
-        <div class="r-cell">
-          <span class="r-n">79.7%</span>
-          <span class="r-k">agreement with the primary judge on the headline grounded-versus-not verdict</span>
-        </div>
-        <div class="r-cell">
-          <span class="r-n">113/120</span>
-          <span class="r-k">answers given the same verdict in every one of the five draws</span>
-        </div>
-        <div class="r-cell">
-          <span class="r-n">5&times;</span>
-          <span class="r-k">independent re-scorings by a judge from a different model family</span>
-        </div>
-      </div>
-
-      <p class="chart-note">Recheck judge: DeepSeek-V4 Flash (served <code>deepseek-v4-flash</code>), run five
-      times over all 120 answers because the judge is not bit-deterministic at temperature 0. Mean agreement
-      is 79.7% on the grounded-versus-not binary (range 78.3&ndash;80.8%, Cohen's <em>&kappa;</em> 0.46) and
-      73.5% on the full six-category verdict. On the Apollo governed cells that carry the substrate-arm
-      contrast, the two judges agree on 52/60. Full distribution in Appendix&nbsp;A.1 of the report; replay it
-      with <code>harness/recheck_judge.py</code>.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose">What the models read</h2>
-      <p class="section-lead prose">Three substrates, one instrument. The control exists to separate answers
-      recovered from training from answers that are simply invented.</p>
-
-      <div class="arms">
-        <div class="arm reveal">
-          <span class="tag">MPL-2.0 &middot; pinned commit</span>
-          <h3>Real model</h3>
-          <p>A verbatim excerpt of the public Airbus Apollo&nbsp;11 SysML&nbsp;v2 reconstruction,
-          pinned to a specific commit.</p>
-        </div>
-        <div class="arm reveal" data-d="1">
-          <span class="tag">hand-authored</span>
-          <h3>EA sidecar</h3>
-          <p>A mock of the paper's epistemic-adequacy layer: closed status vocabulary, provenance,
-          reachable evidence anchors, a derivation node, and explicit unresolved markers.</p>
-        </div>
-        <div class="arm reveal" data-d="2">
-          <span class="tag">fictional vehicle</span>
-          <h3>Out-of-distribution control</h3>
-          <p>A fictional &ldquo;Caldera-2&rdquo; vehicle that no training corpus contains, separating
-          recovered answers from fabricated ones.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="gap-wrap">
-        <div>
-          <h2><span class="lbl">The live gap</span> Four figures, no chain</h2>
-          <p class="section-lead">Independent of the LLM runs, assembling the substrate exposed an
-          epistemic-adequacy failure in the public model, present since its initial commit. Four
-          liftoff-thrust figures coexist with nothing to reconcile them: no construct binds
-          <code>actualLiftoffThrust</code>, no calculation connects engines to stage thrust, and
-          CLR-R055 is absent from the model's own satisfy block.</p>
-          <p class="section-lead">Two of the four sit below the requirement minimum and one above it.
-          The gap is not missing data. The data is present; the authorising chain over it is not.</p>
-        </div>
-
-        <div class="thrust reveal">
-          <div class="thrust-row">
-            <span class="src">Per-engine rated arithmetic (5 &times; 6770&nbsp;kN)</span>
-            <span class="val">33.85 MN</span>
-          </div>
-          <div class="thrust-row">
-            <span class="src">S-IC document text (~7.7&nbsp;million&nbsp;lb)</span>
-            <span class="val">~34.25 MN</span>
-          </div>
-          <div class="thrust-row req">
-            <span class="src">Requirement minimum (CLR-R055)</span>
-            <span class="val">34.5 MN</span>
-          </div>
-          <div class="thrust-row">
-            <span class="src">Execution-package snapshot at liftoff</span>
-            <span class="val">35.1 MN</span>
-          </div>
-          <p class="thrust-cap">Verified against the pinned commit. When asked directly, the stronger
-          models found the discrepancy from the raw numbers; the model itself never surfaces it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose"><span class="lbl">Reproduce</span> Run it yourself</h2>
-      <p class="section-lead prose">The harness re-runs the probe against the Anthropic API with the same
-      prompts, schemas, and judge rubric. Hosted models are non-deterministic and single-run per cell,
-      so cell-level rates track the reported figures rather than match them exactly.</p>
-<pre><code>pip install -r requirements.txt
-export ANTHROPIC_API_KEY=...
-python harness/run_probe.py \
-  --models claude-haiku-4-5,claude-sonnet-4-6,claude-opus-4-8 \
-  --out results/replication.json</code></pre>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="prose">Documents &amp; data</h2>
-      <ul class="links">
-        <li class="wide"><a href="https://doi.org/10.1145/3822455.3838783"><span class="ic">&#9670;</span><span class="txt"><span class="t">Companion paper (MODELS 2026, NIER track)</span><span class="d">doi:10.1145/3822455.3838783 &middot; the peer-reviewed argument this artefact supports</span></span></a></li>
-        <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md"><span class="ic">R</span><span class="txt"><span class="t">Technical report</span><span class="d">Full method, results, and limits</span></span></a></li>
-        <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/RESULTS.md"><span class="ic">&Sigma;</span><span class="txt"><span class="t">Results</span><span class="d">Scored tables and indicator mapping</span></span></a></li>
-        <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/README.md"><span class="ic">&para;</span><span class="txt"><span class="t">README</span><span class="d">Design, caveats, and file map</span></span></a></li>
-        <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/probes.json"><span class="ic">{}</span><span class="txt"><span class="t">Instrument</span><span class="d">Questions, keys, and rubric</span></span></a></li>
-      </ul>
-
-      <div class="cite">
-        <div class="cite-head">
-          <span class="ct">Cite this work</span>
-          <button class="copy-btn" type="button" data-copy="bibtex">Copy BibTeX</button>
-        </div>
-<pre id="bibtex"><code>@inproceedings{gower2026models,
-  author    = {Gower, Jason D. and Henshaw, Michael J. de C. and Ji, Siyuan},
-  title     = {Models as Governed Interfaces for AI-Native {MBSE}:
-               Read-Side Adequacy and Write-Side Admissibility},
-  booktitle = {Proceedings of the ACM/IEEE 29th International Conference on
-               Model Driven Engineering Languages and Systems (MODELS 2026),
-               New Ideas and Emerging Results Track},
-  year      = {2026},
-  month     = oct,
-  publisher = {Association for Computing Machinery},
-  isbn      = {979-8-4007-2809-9},
-  doi       = {10.1145/3822455.3838783}
-}</code></pre>
-      </div>
-      <p class="chart-note">Generated from <code>CITATION.cff</code>, which is the source of truth for
-      citation metadata in this repository and also records the artefact itself as a citable software
-      entry with ORCIDs.</p>
-    </div>
-  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p>Jason D. Gower, Michael J. de C. Henshaw, and Siyuan Ji. &ldquo;Models as Governed
-    Interfaces for AI-Native MBSE: Read-Side Adequacy and Write-Side Admissibility.&rdquo;
-    <em>Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering
-    Languages and Systems (MODELS 2026), New Ideas and Emerging Results Track</em>,
-    M&aacute;laga, Spain, 4&ndash;9 October 2026. ACM.
-    <a href="https://doi.org/10.1145/3822455.3838783">doi:10.1145/3822455.3838783</a></p>
-    <p>Loughborough University, Loughborough, United Kingdom.</p>
-    <p>Harness, instrument, and this page: MIT. Report, results, authored sidecars, and synthetic
-    model: <a href="https://creativecommons.org/licenses/by/4.0/">CC&nbsp;BY&nbsp;4.0</a>. The verbatim
-    Apollo excerpt is MPL-2.0 (Airbus). Launch photograph courtesy of NASA (image 6900540), not
-    protected by copyright in the United States; NASA does not endorse this work.</p>
+<footer class="colophon">
+  <div class="colophon-in">
+    <a class="brand" href="https://systems-researcher.github.io/research-programme/">
+      <img src="./assets/sr-emblem.svg" alt="" width="32" height="32">
+      <span class="brand-name">Systems Researcher</span>
+    </a>
+    <div>
+      <p>Jason D. Gower, Michael J. de C. Henshaw, and Siyuan Ji. &ldquo;Models as Governed
+      Interfaces for AI-Native MBSE: Read-Side Adequacy and Write-Side Admissibility.&rdquo;
+      <em>Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering
+      Languages and Systems (MODELS 2026), New Ideas and Emerging Results Track</em>,
+      M&aacute;laga, Spain, 4&ndash;9 October 2026. ACM.
+      <a href="https://doi.org/10.1145/3822455.3838783">doi:10.1145/3822455.3838783</a></p>
+      <p>Loughborough University, Loughborough, United Kingdom.</p>
+      <p>Harness, instrument, and this page: MIT. Report, results, authored sidecars, and synthetic
+      model: <a href="https://creativecommons.org/licenses/by/4.0/">CC&nbsp;BY&nbsp;4.0</a>. The verbatim
+      Apollo excerpt is MPL-2.0 (Airbus). Launch photograph courtesy of NASA (image 6900540), not
+      protected by copyright in the United States; NASA does not endorse this work.</p>
+    </div>
+    <div>
+      <p><a href="https://github.com/systems-researcher/epistemic-adequacy-probe">Repository</a></p>
+      <p><a href="https://systems-researcher.github.io/research-programme/">Where this study sits in the programme</a></p>
+    </div>
   </div>
 </footer>
-
-<script>
-// Scroll reveal. IntersectionObserver only: no scroll listeners, no rAF loops.
-// Every animated value is the literal text already in the DOM, so the page is
-// complete and correct with JavaScript disabled.
-(function () {
-  var els = document.querySelectorAll('.reveal');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  if (reduce.matches || !('IntersectionObserver' in window)) {
-    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
-
-  els.forEach(function (el) { io.observe(el); });
-})();
-
-// Copy-to-clipboard for the citation. The BibTeX is real text in the DOM, so it
-// stays selectable and copyable by hand if the clipboard API is unavailable.
-(function () {
-  var btn = document.querySelector('[data-copy]');
-  if (!btn) return;
-  var src = document.getElementById(btn.getAttribute('data-copy'));
-  if (!src || !navigator.clipboard) { btn.hidden = true; return; }
-
-  btn.addEventListener('click', function () {
-    navigator.clipboard.writeText(src.innerText.trim()).then(function () {
-      var was = btn.textContent;
-      btn.textContent = 'Copied';
-      setTimeout(function () { btn.textContent = was; }, 1600);
-    }).catch(function () {
-      btn.textContent = 'Press Ctrl+C';
-      var r = document.createRange();
-      r.selectNodeContents(src);
-      var s = window.getSelection();
-      s.removeAllRanges();
-      s.addRange(r);
-    });
-  });
-})();
-</script>
 </body>
 </html>
