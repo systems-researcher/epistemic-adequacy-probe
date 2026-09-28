@@ -247,6 +247,130 @@ SPDX-License-Identifier: MIT
     substrate, which is precisely the failure a reviewer cannot catch by reading the answer.</p>
     <p>Haiku, the weakest consumer, moved least. It had less to confabulate with.</p>
   </section>
+
+  <section class="sec" id="scoring" aria-labelledby="h-scoring">
+    <h2 id="h-scoring"><a class="sec-n" href="#scoring">§ 6</a> Is the scoring sound?</h2>
+    <aside class="side record" aria-labelledby="h-recheck">
+      <p class="record-t" id="h-recheck">The recheck</p>
+      <dl>
+        <dt>Agreement</dt><dd>79.7% with the primary judge on the headline grounded-versus-not verdict</dd>
+        <dt>Stable</dt><dd>113/120 answers given the same verdict in every one of the five draws</dd>
+        <dt>Recheck</dt><dd>5&times; independent re-scorings by a judge from a different model family</dd>
+      </dl>
+    </aside>
+    <p>The reported verdicts come from a judge in the same model family as the
+    consumers, which is a fair thing to distrust. Every answer was therefore re-scored by an independent
+    judge from a different family, five times over. The check bounds inter-model judge bias. It does
+    not establish that any LLM judge tracks ground truth; that is what the per-question keys are for.</p>
+    <p>Recheck judge: DeepSeek-V4 Flash (served <code>deepseek-v4-flash</code>), run five
+    times over all 120 answers because the judge is not bit-deterministic at temperature 0. Mean agreement
+    is 79.7% on the grounded-versus-not binary (range 78.3&ndash;80.8%, Cohen's <em>&kappa;</em> 0.46) and
+    73.5% on the full six-category verdict. On the Apollo governed cells that carry the substrate-arm
+    contrast, the two judges agree on 52/60. Full distribution in Appendix&nbsp;A.1 of the report; replay it
+    with <code>harness/recheck_judge.py</code>.</p>
+  </section>
+
+  <section class="sec" id="arms" aria-labelledby="h-arms">
+    <h2 id="h-arms"><a class="sec-n" href="#arms">§ 7</a> What the models read</h2>
+    <p>Three substrates, one instrument. The control exists to separate answers
+    recovered from training from answers that are simply invented.</p>
+    <dl class="terms">
+      <dt>Real model</dt>
+      <dd>A verbatim excerpt of the public Airbus Apollo&nbsp;11 SysML&nbsp;v2 reconstruction,
+      pinned to a specific commit. <code>MPL-2.0 &middot; pinned commit</code></dd>
+      <dt>EA sidecar</dt>
+      <dd>A mock of the paper's epistemic-adequacy layer: closed status vocabulary, provenance,
+      reachable evidence anchors, a derivation node, and explicit unresolved markers.
+      <code>hand-authored</code></dd>
+      <dt>Out-of-distribution control</dt>
+      <dd>A fictional &ldquo;Caldera-2&rdquo; vehicle that no training corpus contains, separating
+      recovered answers from fabricated ones. <code>fictional vehicle</code></dd>
+    </dl>
+  </section>
+
+  <section class="sec" id="thrust" aria-labelledby="h-thrust">
+    <h2 id="h-thrust"><a class="sec-n" href="#thrust">§ 8</a> Four figures, no chain</h2>
+    <p>Independent of the LLM runs, assembling the substrate exposed an
+    epistemic-adequacy failure in the public model, present since its initial commit. Four
+    liftoff-thrust figures coexist with nothing to reconcile them: no construct binds
+    <code>actualLiftoffThrust</code>, no calculation connects engines to stage thrust, and
+    CLR-R055 is absent from the model's own satisfy block.</p>
+    <p>Two of the four sit below the requirement minimum and one above it.
+    The gap is not missing data. The data is present; the authorising chain over it is not.</p>
+
+    <div class="scroll-x" tabindex="0" role="region" aria-label="Liftoff thrust figures, four sources">
+      <table class="data">
+        <thead>
+          <tr>
+            <th scope="col">Source</th>
+            <th scope="col" class="r">Liftoff thrust</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Per-engine rated arithmetic (5 &times; 6770&nbsp;kN)</th>
+            <td class="r">33.85 MN</td>
+          </tr>
+          <tr>
+            <th scope="row">S-IC document text (~7.7&nbsp;million&nbsp;lb)</th>
+            <td class="r">~34.25 MN</td>
+          </tr>
+          <tr>
+            <th scope="row">Requirement minimum (CLR-R055)</th>
+            <td class="r"><span class="annot">34.5 MN</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Execution-package snapshot at liftoff</th>
+            <td class="r">35.1 MN</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Verified against the pinned commit. When asked directly, the stronger
+    models found the discrepancy from the raw numbers; the model itself never surfaces it.</p>
+  </section>
+
+  <section class="sec" id="reproduce" aria-labelledby="h-reproduce">
+    <h2 id="h-reproduce"><a class="sec-n" href="#reproduce">§ 9</a> Run it yourself</h2>
+    <p>The harness re-runs the probe against the Anthropic API with the same
+    prompts, schemas, and judge rubric. Hosted models are non-deterministic and single-run per cell,
+    so cell-level rates track the reported figures rather than match them exactly.</p>
+<pre><code>pip install -r requirements.txt
+export ANTHROPIC_API_KEY=...
+python harness/run_probe.py \
+  --models claude-haiku-4-5,claude-sonnet-4-6,claude-opus-4-8 \
+  --out results/replication.json</code></pre>
+  </section>
+
+  <section class="sec" id="documents" aria-labelledby="h-documents">
+    <h2 id="h-documents"><a class="sec-n" href="#documents">§ 10</a> Documents &amp; data</h2>
+    <ul class="sources">
+      <li><a href="https://doi.org/10.1145/3822455.3838783">doi:10.1145/3822455.3838783</a><span>Companion paper (MODELS 2026, NIER track): the peer-reviewed argument this artefact supports.</span></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/report/REPORT.md">report/REPORT.md</a><span>Technical report: full method, results, and limits.</span></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/RESULTS.md">RESULTS.md</a><span>Results: scored tables and indicator mapping.</span></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/README.md">README.md</a><span>Design, caveats, and file map.</span></li>
+      <li><a href="https://github.com/systems-researcher/epistemic-adequacy-probe/blob/main/probes.json">probes.json</a><span>Instrument: questions, keys, and rubric.</span></li>
+    </ul>
+
+    <h3>Cite this work</h3>
+    <p><button type="button" data-copy="bibtex">Copy BibTeX</button></p>
+<pre class="cite" id="bibtex"><code>@inproceedings{gower2026models,
+  author    = {Gower, Jason D. and Henshaw, Michael J. de C. and Ji, Siyuan},
+  title     = {Models as Governed Interfaces for AI-Native {MBSE}:
+               Read-Side Adequacy and Write-Side Admissibility},
+  booktitle = {Proceedings of the ACM/IEEE 29th International Conference on
+               Model Driven Engineering Languages and Systems (MODELS 2026),
+               New Ideas and Emerging Results Track},
+  year      = {2026},
+  month     = oct,
+  publisher = {Association for Computing Machinery},
+  isbn      = {979-8-4007-2809-9},
+  doi       = {10.1145/3822455.3838783}
+}</code></pre>
+    <p>Generated from <code>CITATION.cff</code>, which is the source of truth for
+    citation metadata in this repository and also records the artefact itself as a citable software
+    entry with ORCIDs.</p>
+  </section>
 </main>
 
 <footer class="colophon">
@@ -274,5 +398,30 @@ SPDX-License-Identifier: MIT
     </div>
   </div>
 </footer>
+<script>
+// Copy-to-clipboard for the citation. The BibTeX is real text in the DOM, so it
+// stays selectable and copyable by hand if the clipboard API is unavailable.
+(function () {
+  var btn = document.querySelector('[data-copy]');
+  if (!btn) return;
+  var src = document.getElementById(btn.getAttribute('data-copy'));
+  if (!src || !navigator.clipboard) { btn.hidden = true; return; }
+
+  btn.addEventListener('click', function () {
+    navigator.clipboard.writeText(src.innerText.trim()).then(function () {
+      var was = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = was; }, 1600);
+    }).catch(function () {
+      btn.textContent = 'Press Ctrl+C';
+      var r = document.createRange();
+      r.selectNodeContents(src);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    });
+  });
+})();
+</script>
 </body>
 </html>
