@@ -1,0 +1,37 @@
+/* Systems Researcher brand tokens.
+   Source of truth: brandkit/state.json (essential kit approved, v4).
+   Palette: Figure and Petrol rev 1. Logo: Registered SR monogram.
+   Type: EB Garamond display, IBM Plex Sans body. */
+
+:root {
+  /* Color roles */
+  --sr-plate: #F2F3F1;           /* page background */
+  --sr-ink: #131B22;             /* text */
+  --sr-petrol: #0F5257;          /* primary: structure, links, active states */
+  --sr-annotation-red: #A63A2B;  /* support: callouts, underlines, one per composition */
+  --sr-grid-grey: #C9CDC9;       /* neutral: hairlines, grids, dividers */
+
+  /* Typography */
+  --sr-font-display: "EB Garamond", Georgia, "Times New Roman", serif;
+  --sr-font-body: "IBM Plex Sans", "Segoe UI", -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --sr-space-1: 4px;
+  --sr-space-2: 8px;
+  --sr-space-3: 12px;
+  --sr-space-4: 16px;
+  --sr-space-5: 24px;
+  --sr-space-6: 32px;
+  --sr-space-7: 48px;
+  --sr-space-8: 64px;
+
+  /* Shape and rules */
+  --sr-radius: 0px;              /* rectilinear; soften to 2px only where needed */
+  --sr-rule: 1px solid var(--sr-grid-grey);
+  --sr-rule-strong: 1px solid var(--sr-ink);
+  --sr-rule-masthead: 3px double var(--sr-ink);
+
+  /* Composition */
+  --sr-measure: 68ch;            /* body text measure, keep 60-75ch */
+  --sr-logo-clear-space: 1em;    /* relative to mark cap height */
+}
