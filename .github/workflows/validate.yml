@@ -81,3 +81,95 @@ jobs:
             echo "::error::landing page links to an unapproved host"; exit 1
           fi
           echo "OK: landing page self-contained"
+
+      - name: Brandkit page contract (docs/)
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re, sys, pathlib
+          from urllib.parse import urlsplit
+
+          # Kit page contract for docs/, re-implemented inline from the sibling
+          # kit's tools/check_site.py so the gate never executes checked-out
+          # repository code. Drift tripwire only; byte-identity and the wider
+          # kit checks stay with the local check_site.py run.
+          DOCS = pathlib.Path("docs")
+          PAGE = DOCS / "index.html"
+          s = PAGE.read_text(encoding="utf-8")
+          errors = []
+
+          # 1. No page-level <style> block (kit L109, case-insensitive here:
+          # an uppercase <STYLE> is valid HTML and must still fail).
+          if re.search(r"<style", s, re.I):
+              errors.append("kit contract: page-level <style> block in docs/index.html")
+
+          # 2. No literal colour in style/SVG paint attribute values (kit
+          # L36+L38; attribute names matched case-insensitively here).
+          COLOUR = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(")
+          PAINT = re.compile(r"""\b(?:style|fill|stroke|stop-color|color|flood-color|lighting-color)\s*=\s*(["'])(.*?)\1""", re.S | re.I)
+          for _, value in PAINT.findall(s):
+              if COLOUR.search(value):
+                  errors.append(f"kit contract: literal colour in style/paint attribute of docs/index.html: {value}")
+
+          # 3. First two stylesheet links in document order are the kit pair
+          # (kit L88 rel-token harvest + L108 comparison; query and fragment
+          # stripped; ./ and root-relative forms both accepted).
+          def resolve(path):
+              p = (DOCS / path.lstrip("/")) if path.startswith("/") else (PAGE.parent / path)
+              return p.resolve()
+
+          ATTR = re.compile(r"""([\w:-]+)\s*=\s*(["'])(.*?)\2""", re.S)
+          sheets = []
+          for tag in re.findall(r"<link\b[^>]*>", s, re.I):
+              a = {k.lower(): v for k, _, v in ATTR.findall(tag)}
+              if "stylesheet" in a.get("rel", "").lower().split() and "href" in a:
+                  sheets.append(resolve(urlsplit(a["href"]).path))
+          want = [(DOCS / "assets/tokens.css").resolve(), (DOCS / "assets/sr-site.css").resolve()]
+          if sheets[:2] != want:
+              errors.append("kit contract: first two stylesheet links must be assets/tokens.css then assets/sr-site.css")
+
+          # 4. Skip link literal plus its target (kit L107; the literal is
+          # order-sensitive by design).
+          if 'class="skip" href="#main"' not in s or 'id="main"' not in s:
+              errors.append('kit contract: skip link class="skip" href="#main" or id="main" target missing')
+
+          # 5. Exactly one h1 (kit L116, case-insensitive here; an
+          # attribute-bearing or uppercase h1 counts).
+          h1s = len(re.findall(r"<h1", s, re.I))
+          if h1s != 1:
+              errors.append(f"kit contract: docs/index.html must contain exactly one h1 (found {h1s})")
+
+          # 6. At most one annotation mark (kit L115).
+          annots = s.count('class="annot"')
+          if annots > 1:
+              errors.append(f'kit contract: at most one class="annot" allowed (found {annots})')
+
+          # 7. The 15 shared kit assets exist (kit SHARED list, 2026-09-28
+          # snapshot, og.png excluded). Existence only.
+          SHARED = [
+              "assets/tokens.css",
+              "assets/sr-site.css",
+              "assets/sr-zoom.js",
+              "assets/sr-emblem.svg",
+              "assets/favicon.ico",
+              "assets/favicon-32x32.png",
+              "assets/apple-touch-icon.png",
+              "assets/fonts/eb-garamond-latin-400-italic.woff2",
+              "assets/fonts/eb-garamond-latin-400-normal.woff2",
+              "assets/fonts/eb-garamond-latin-600-normal.woff2",
+              "assets/fonts/ibm-plex-sans-latin-400-italic.woff2",
+              "assets/fonts/ibm-plex-sans-latin-400-normal.woff2",
+              "assets/fonts/ibm-plex-sans-latin-600-normal.woff2",
+              "assets/fonts/OFL-EB-Garamond.txt",
+              "assets/fonts/OFL-IBM-Plex-Sans.txt",
+          ]
+          for rel in SHARED:
+              if not (DOCS / rel).is_file():
+                  errors.append(f"kit contract: missing shared kit asset docs/{rel}")
+
+          if errors:
+              for e in errors:
+                  print(f"::error::{e}")
+              sys.exit(1)
+          print("OK: docs/ meets the brandkit page contract")
+          PY
