@@ -79,6 +79,174 @@ SPDX-License-Identifier: MIT
     &middot; <a href="https://github.com/systems-researcher/epistemic-adequacy-probe">View the artefact</a></p>
   </header>
 
+  <section class="sec" id="initial-findings" aria-labelledby="h-initial">
+    <h2 id="h-initial"><a class="sec-n" href="#initial-findings">§ 1</a> Initial findings</h2>
+    <ul class="bounds">
+      <li><b>A first, deliberately small probe.</b> <span>One thrust chain, one model family, one
+      hand-authored sidecar, a single run per cell. It establishes that the effect is real and
+      measurable, not its size in general.</span></li>
+      <li><b>The full susceptibility probe is still being designed.</b> <span>With the companion
+      paper's three-arm design, cost-matched curation, cross-vendor replication, and a write-side
+      gate.</span></li>
+      <li><b>Read these numbers as a direction and a method, not a benchmark.</b> <span>Single run
+      per cell; see the caveats in the report.</span></li>
+    </ul>
+  </section>
+
+  <section class="sec" id="what-this-is" aria-labelledby="h-what">
+    <h2 id="h-what"><a class="sec-n" href="#what-this-is">§ 2</a> What this is</h2>
+    <figure class="plate is-wide">
+      <div class="plate-body">
+        <img src="./assets/apollo-11-liftoff-nasa-6900540.jpg"
+             width="1509" height="1920" fetchpriority="high" decoding="async"
+             alt="Apollo 11 lifting off from Launch Complex 39A on 16 July 1969, the Saturn V first stage at full thrust as the vehicle clears the tower.">
+      </div>
+      <figcaption id="fig-1-cap"><span class="fig-n">Figure 1</span>Apollo&nbsp;11 leaves Launch Complex&nbsp;39A, 16&nbsp;July&nbsp;1969. The S-IC first stage
+      at full thrust is the derivation chain this probe interrogates. Image: NASA (6900540).</figcaption>
+    </figure>
+    <p>This is the first probe of a research programme set out in a companion
+    paper published in the NIER track of MODELS&nbsp;2026. We posed fifteen derivation-style
+    questions about the Saturn&nbsp;V
+    first-stage thrust chain to three frontier LLMs over the public Airbus Apollo&nbsp;11
+    SysML&nbsp;v2 reconstruction, crossing two substrate arms with two instructions, plus a
+    fictional out-of-distribution control vehicle. The arms were the bare model and the model
+    plus a hand-authored epistemic-metadata <em>sidecar</em>. One instruction permitted reporting
+    absence; the other pressed for a decisive answer under a simulated deadline.
+    Across 120 judged answers, three results carry the probe.</p>
+  </section>
+
+  <section class="sec" id="findings" aria-labelledby="h-findings">
+    <h2 id="h-findings"><a class="sec-n" href="#findings">§ 3</a> What we measured</h2>
+
+    <aside class="side"><span class="side-k">13&rarr;60%</span>Ungrounded</aside>
+    <h3>Pressure breaks grounding.</h3>
+    <p>Under a governed instruction the bare model produced unauthorised content
+    in about 13% of answers; under deadline-style pressure this rose to 60% (9 of 15). The
+    strongest model failed most fluently, every unauthorised claim was historically plausible.</p>
+
+    <aside class="side"><span class="side-k">2.2%</span>Residual</aside>
+    <h3>Metadata holds the line.</h3>
+    <p>A hand-authored epistemic-metadata sidecar held governed-instruction
+    failures to 1 in 45, roughly halved the pressure-induced failures (to 33%), and turned the
+    requirement-satisfaction verdict into one all three models answered from the record.</p>
+
+    <aside class="side"><span class="side-k">4</span>Thrust figures</aside>
+    <h3>A live gap, in the artefact itself.</h3>
+    <p>Assembling the probe surfaced a finding in the public model: four
+    unreconciled liftoff-thrust figures, present since its first commit, with no construct to
+    compute, flag, or reconcile them.</p>
+  </section>
+
+  <section class="sec" id="cells" aria-labelledby="h-cells">
+    <h2 id="h-cells"><a class="sec-n" href="#cells">§ 4</a> Ungrounded answers, by cell</h2>
+    <p>Each bar is the share of judged answers a cell could not authorise from its
+    substrate, pooled across the three models. Pressure is the variable that separates a substrate
+    that can refuse on the record's behalf from an instruction that merely asks the consumer to.</p>
+
+    <figure class="plate">
+      <div class="plate-body">
+        <div class="bars">
+          <div class="bars-group">
+            <h3>Apollo, governed</h3>
+            <div class="bar-row">
+              <span class="bar-label">Model only</span>
+              <span class="bar-track"><span class="bar-fill" style="--v:22.2%"></span></span>
+              <span class="bar-value">13.3%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">+ EA sidecar</span>
+              <span class="bar-track"><span class="bar-fill is-open" style="--v:5.5%"></span></span>
+              <span class="bar-value">3.3%</span>
+            </div>
+          </div>
+          <div class="bars-group">
+            <h3>Apollo, pressed</h3>
+            <div class="bar-row">
+              <span class="bar-label">Model only</span>
+              <span class="bar-track"><span class="bar-fill" style="--v:100%"></span></span>
+              <span class="bar-value">60.0%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">+ EA sidecar</span>
+              <span class="bar-track"><span class="bar-fill is-open" style="--v:55.6%"></span></span>
+              <span class="bar-value">33.3%</span>
+            </div>
+          </div>
+          <div class="bars-group">
+            <h3>Caldera control</h3>
+            <div class="bar-row">
+              <span class="bar-label">Model only</span>
+              <span class="bar-track"><span class="bar-fill" style="--v:22.2%"></span></span>
+              <span class="bar-value">13.3%</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">+ EA sidecar</span>
+              <span class="bar-track"><span class="bar-fill is-open" style="--v:0%"></span></span>
+              <span class="bar-value">0.0%</span>
+            </div>
+          </div>
+        </div>
+        <ul class="key">
+          <li><span class="key-swatch"></span>Model only</li>
+          <li><span class="key-swatch is-open"></span>With EA sidecar</li>
+        </ul>
+      </div>
+      <figcaption id="fig-2-cap"><span class="fig-n">Figure 2</span>Ungrounded = either ungrounded verdict category, pooled across Haiku&nbsp;4.5,
+      Sonnet&nbsp;4.6, and Opus&nbsp;4.8. Denominators are per cell: n&nbsp;=&nbsp;30 for each Apollo governed
+      cell, n&nbsp;=&nbsp;15 for each pressed and each Caldera cell, 120 in total. Bars are scaled to the
+      60% maximum. The 2.2% quoted above pools the two governed <em>+EA</em> cells (1 of 45), the
+      denominator the report uses for the governed-instruction headline. Single run per cell;
+      see the caveats in the report. <a href="#caveat" aria-label="Standing caveat">&dagger;</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="sec" id="slope" aria-labelledby="h-slope">
+    <h2 id="h-slope"><a class="sec-n" href="#slope">§ 5</a> The strongest model fails hardest</h2>
+    <p>Reading the bare model, each consumer was asked the same five questions
+    under both instructions. When reporting absence is permitted, capability protects: the strongest
+    model was never ungrounded. When an answer is demanded, capability inverts, and the model with the
+    most to draw on from training is the one that draws on it.</p>
+
+    <figure class="plate dd">
+      <div class="plate-body">
+        <svg viewBox="0 0 440 300" role="img"
+             aria-label="Slope chart. Ungrounded answers under a governed instruction versus a pressed instruction, bare model. Haiku rises from 30 percent to 40 percent. Sonnet rises from 10 percent to 60 percent. Opus rises from 0 percent to 80 percent.">
+          <line class="rule-solid" x1="95" y1="250" x2="340" y2="250"></line>
+          <line class="rule" x1="95" y1="34" x2="340" y2="34" stroke-dasharray="3 4"></line>
+          <line class="rule" x1="95" y1="142" x2="340" y2="142" stroke-dasharray="3 4"></line>
+          <text class="t-sans muted" x="340" y="26" text-anchor="end">80% ungrounded</text>
+          <text class="t-sans muted" x="340" y="134" text-anchor="end">40%</text>
+          <text class="t-sans ink" x="95" y="278" text-anchor="middle" font-weight="600">Governed</text>
+          <text class="t-sans ink" x="340" y="278" text-anchor="middle" font-weight="600">Pressed</text>
+          <text class="t-sans muted" x="88" y="166" text-anchor="end">Haiku 30%</text>
+          <text class="t-sans muted" x="88" y="220" text-anchor="end">Sonnet 10%</text>
+          <text class="t-sans accent" x="88" y="244" text-anchor="end">Opus 0%</text>
+          <path class="muted-line" d="M95 169 L340 142" fill="none" stroke-width="2.5" stroke-linecap="round"></path>
+          <path class="ink-line" d="M95 223 L340 88" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 3"></path>
+          <path class="accent-line" d="M95 250 L340 34" fill="none" stroke-width="2.5" stroke-linecap="round"></path>
+          <circle class="muted" cx="95" cy="169" r="5"></circle>
+          <circle class="muted" cx="340" cy="142" r="5"></circle>
+          <circle class="ink" cx="95" cy="223" r="5"></circle>
+          <circle class="ink" cx="340" cy="88" r="5"></circle>
+          <circle class="focal" cx="95" cy="250" r="5"></circle>
+          <circle class="focal" cx="340" cy="34" r="5"></circle>
+          <text class="t-sans muted" x="352" y="146">Haiku 4.5 &middot; 40%</text>
+          <text class="t-sans muted" x="352" y="92">Sonnet 4.6 &middot; 60%</text>
+          <text class="t-sans accent" x="352" y="38">Opus 4.8 &middot; 80%</text>
+        </svg>
+      </div>
+      <figcaption id="fig-3-cap"><span class="fig-n">Figure 3</span>Bare model (no sidecar), Apollo substrate. Governed n&nbsp;=&nbsp;10 questions per
+      model; pressed n&nbsp;=&nbsp;5, the five hardest questions, which are a subset of the governed ten.
+      Counts: Haiku 3/10 and 2/5, Sonnet 1/10 and 3/5, Opus 0/10 and 4/5. Single run per cell.
+      <a href="#caveat" aria-label="Standing caveat">&dagger;</a></figcaption>
+    </figure>
+
+    <p>Opus answered all ten governed questions from the record and none of them
+    unauthorised. Pressed on the five hardest, four of five went ungrounded, and every one of those
+    claims was historically true: content recovered from training rather than derived from the
+    substrate, which is precisely the failure a reviewer cannot catch by reading the answer.</p>
+    <p>Haiku, the weakest consumer, moved least. It had less to confabulate with.</p>
+  </section>
 </main>
 
 <footer class="colophon">
