@@ -335,7 +335,7 @@ SPDX-License-Identifier: MIT
     <p>The harness re-runs the probe against the Anthropic API with the same
     prompts, schemas, and judge rubric. Hosted models are non-deterministic and single-run per cell,
     so cell-level rates track the reported figures rather than match them exactly.</p>
-<pre><code>pip install -r requirements.txt
+<pre style="white-space: pre-wrap; overflow-wrap: anywhere"><code>pip install -r requirements.txt
 export ANTHROPIC_API_KEY=...
 python harness/run_probe.py \
   --models claude-haiku-4-5,claude-sonnet-4-6,claude-opus-4-8 \
