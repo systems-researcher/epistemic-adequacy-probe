@@ -10,6 +10,7 @@ probe-*.png
 # Superpowers pipeline artifacts (not shipped)
 .superpowers/
 docs/superpowers/
+brainstorms/
 
 # Session-local agent artifacts (not shipped)
 .zcode/
